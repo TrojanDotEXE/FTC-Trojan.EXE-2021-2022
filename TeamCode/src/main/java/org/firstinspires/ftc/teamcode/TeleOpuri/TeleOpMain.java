@@ -8,9 +8,9 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
 public class TeleOpMain extends OpMode
-{   HardwareM fer = new HardwareM();    //Variabile
+{   HardwareM fer = new HardwareM();    //Variabile ..
     private ElapsedTime runtime = new ElapsedTime();
-                                        //TODO: adauga un timer pe telemetry .
+                                        //TODO: adauga un timer pe telemetry
     @Override
     public void init() {
         fer.init(hardwareMap);
