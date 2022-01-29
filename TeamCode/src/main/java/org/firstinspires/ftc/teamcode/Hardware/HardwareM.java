@@ -13,8 +13,6 @@ public class HardwareM extends LinearOpMode
                    brat_Scripete = null;
     public DcMotor carusel       = null  , peria        = null; //Altele
 
-    public Servo servoBrat = null;//Servouri
-
     public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
@@ -39,21 +37,11 @@ public class HardwareM extends LinearOpMode
         peria        = hardwaremap.get(DcMotor.class, "motorPeria");
         carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
 
-        servoBrat = hardwaremap.get(Servo.class, "servoBrat");
-
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, carusel);               //set 0 Behaivior
-        setDirections(DcMotor.Direction.FORWARD, roataStanga, brat_S, brat_D, brat_Scripete, peria, carusel);                            //set Directions Forward
-        setDirections(DcMotor.Direction.REVERSE, roataDreapta, brat_S);                                                             //set Directions Reverse
+        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, peria, carusel);                            //set Directions Forward
+        setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S);                                                             //set Directions Reverse
         setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, carusel);    //set encoders
         stopMotors();   //setPower 0
-
-        servoReset();
-        setDirections(Servo.Direction.FORWARD, servoBrat);
-
-    }
-
-    private void servoReset() {
-        servoBrat.setPosition(0);
     }
 
     public void stopMotors() {

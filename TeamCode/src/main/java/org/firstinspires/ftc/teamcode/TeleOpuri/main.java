@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
-public class TeleOpMain extends OpMode
+public class main extends OpMode
 {   HardwareM fer = new HardwareM();    //Variabile ..
     private ElapsedTime runtime = new ElapsedTime();
                                         //TODO: adauga un timer pe telemetry
@@ -62,9 +62,6 @@ public class TeleOpMain extends OpMode
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
             telemetry.addData("Slowmode", "Dezactivat");
-
-        if(gamepad2.a) fer.servoBrat.setPosition(servo_on);
-            fer.servoBrat.setPosition(servo_off);
 
         //Peria
         if(gamepad2.left_bumper) {

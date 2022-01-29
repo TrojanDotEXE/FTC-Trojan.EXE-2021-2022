@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-@TeleOp(name = "TeleOP", group = "Other")
+@TeleOp(name = "cleste", group = "Other")
 @Disabled
 public class TeleOp_Cleste extends OpMode{
 
@@ -52,9 +52,6 @@ public class TeleOp_Cleste extends OpMode{
             fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
             fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
             telemetry.addData("Slowmode", "Dezactivat");
-
-            if(gamepad2.a) fer.servoBrat.setPosition(.5);
-            else fer.servoBrat.setPosition(0);
 
 //        if(gamepad2.y) {
 //            fer.goToPosition(fer.SCRIPETE_ROTATION, 1, fer.brat_A); //TODO: lungimea sforii
