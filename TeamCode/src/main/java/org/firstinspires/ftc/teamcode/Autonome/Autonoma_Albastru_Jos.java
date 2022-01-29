@@ -84,6 +84,7 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma {
             //7.2: mergi in fata pana in warehouse
             turn ( p,rs, rd);
             drive ( p,r);
+
         }
     }
 }
