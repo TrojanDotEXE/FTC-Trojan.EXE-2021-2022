@@ -35,7 +35,7 @@ public class HardwareM extends LinearOpMode
         roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
         brat_S       = hardwaremap.get(DcMotor.class, "motorS");
         brat_D       = hardwaremap.get(DcMotor.class, "motorD");
-        brat_Scripete = hardwaremap.get(DcMotor.class, "motor3");
+        brat_Scripete = hardwaremap.get(DcMotor.class, "motorScripete");
         peria        = hardwaremap.get(DcMotor.class, "motorPeria");
         carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
 

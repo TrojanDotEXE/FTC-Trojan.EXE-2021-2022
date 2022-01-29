@@ -25,7 +25,7 @@ public class TemplateAutonoma extends LinearOpMode {
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
     }
 
-    public void rotationR (double power, int rotatii) {
+    public void rotationD(double power, int rotatii) {
         fer.goToPosition(power, rotatii, fer.roataStanga);
 
         while(opModeIsActive() && fer.roataStanga.isBusy()){};
@@ -58,5 +58,12 @@ public class TemplateAutonoma extends LinearOpMode {
 
         while(opModeIsActive() && fer.peria.isBusy()) {}
         fer.stopMotors(fer.peria);
+    }
+
+    public void carusel (double power, int rotatii) {
+        fer.goToPosition(power, rotatii, fer.carusel);
+
+        while(opModeIsActive() && fer.carusel.isBusy()) {}
+        fer.stopMotors(fer.carusel);
     }
 }

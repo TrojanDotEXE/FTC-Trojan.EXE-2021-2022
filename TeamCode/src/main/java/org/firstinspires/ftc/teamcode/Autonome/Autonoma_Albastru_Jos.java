@@ -27,9 +27,9 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma {
             //2.1': intrarcere 90 grade stanga
             //2.2': mergi pana la carusel cu spatele
 
-          turn(p ,rs, rd);
-          drive(p,r);
-        //Segment 3 : Da o ratusca jos
+            turn(p ,rs, rd);
+            drive(p,r);
+            //Segment 3 : Da o ratusca jos
 
 
             //Segment 4 : Dute la depozit si ia freight
@@ -40,23 +40,27 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma {
 
             turn (p,rs,rd);
             drive(p,r);
-           brat(p,r);
-           peria(p,r);
-           drive(p,r);
+            brat(p,r);
+            peria(p,r);
+            drive(p,r);
 
             //Segment 5 : Du Freightul in team s.h.
             //5.1: ridica bratul la nivelul de jos al s.h.
-            //5.2: ioarce te 180 grade dreapta
-            //5.3:mergi fata pana la D1
-            //5.4: intoarce te stanga 90 grade
-            //5.5: extinde brat si pune freightul pe stratul de jos
-
             brat (p,r);
+            //5.2: ioarce te 180 grade dreapta
             turn ( p,rs,rd);
+            //5.3:mergi fata pana la D1
             drive ( p,r);
+            //5.4: intoarce te stanga 90 grade
             turn ( p,rs,rd);
+            //5.5: extinde brat si pune freightul pe stratul de jos
             scripete(p,r);
             scripete(-p,r);
+
+
+
+
+
             //segment 6: loop s.h.-depozit
             //6.1: mergi spate pana la D1
             //6.2: intoarce te 90 grade stanga
@@ -81,8 +85,8 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma {
 
             //segment 7: parcheaza te
             //7.1: intoarce te 90 grade dreapta
-            //7.2: mergi in fata pana in warehouse
             turn ( p,rs, rd);
+            //7.2: mergi in fata pana in warehouse
             drive ( p,r);
 
         }
