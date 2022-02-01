@@ -5,14 +5,13 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-@Autonomous (name="Rosu_Sus",group="Autonome")
+@Autonomous (name="Rosu_Sus", group="Autonome")
 public class Autonoma_Rosu_Sus extends TemplateAutonoma
 {
-//    HardwareM fer = new HardwareM();
+    HardwareM fer = new HardwareM();
 
     @Override
-    public void runOpMode() throws InterruptedException
-    {
+    public void runOpMode() throws InterruptedException {
         fer.init(hardwareMap);
         telemetry.addData("Robot", "Iitializat");
         telemetry.update();

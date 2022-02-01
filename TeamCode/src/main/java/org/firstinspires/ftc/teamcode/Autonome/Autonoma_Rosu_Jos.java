@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.Autonome;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+
+@Autonomous(name = "Rosu_Jos", group = "Autonome")
 public class Autonoma_Rosu_Jos extends TemplateAutonoma
 {
     HardwareM fer = new HardwareM();
@@ -17,6 +21,7 @@ public class Autonoma_Rosu_Jos extends TemplateAutonoma
         {
             //Segment 1 : Analizeaza pozitie ratusca/element echipa     //TODO: camera recunoastere ratuste, element echipa
             //1.1
+
             //Segment 2 : Intoarcete si pozitioneazate la carusel
             //2.1 intoarcere 90 grade stanga
             rotationS(p,r);

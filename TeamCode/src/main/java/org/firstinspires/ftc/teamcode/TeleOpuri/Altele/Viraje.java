@@ -8,47 +8,32 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp (name = "Viraje", group = "Other")
 @Disabled
-
 public class Viraje extends OpMode {
-
     DcMotor roataStanga, roataDreapta;
 
     @Override
-    public void init()
-    {
-        //Motoare
+    public void init() {
         roataStanga  = hardwareMap.get(DcMotor.class, "motorStanga");
         roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
-
-        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);    //Directie motoare
+        roataDreapta.setDirection(DcMotorSimple.Direction.FORWARD);
         roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
-
     }
 
     @Override
-    public void loop()
-    {
-
-        double left;
-        double right;
+    public void loop() {
+        double left, right;
         double max;
-
         double fata_spate = gamepad1.left_stick_y;
-        double stanga_dreapta = gamepad1.right_stick_x;        //Range.clip?
+        double stanga_dreapta = gamepad1.right_stick_x;
 
-        left = fata_spate - stanga_dreapta;
+        left  = fata_spate - stanga_dreapta;
         right = fata_spate + stanga_dreapta;
-//
-//        max = Math.max(Math.abs(left), Math.abs(right));
-//        if (max > 1.0)
-//        {
-//            left /= max;
-//            right /= max;
-//        }
-
-
+        max   = Math.max(Math.abs(left), Math.abs(right));
+        if (max > 1.0) {
+            left /= max;
+            right /= max;
+        }
         roataStanga.setPower(left);
         roataDreapta.setPower(right);
-
     }
 }
