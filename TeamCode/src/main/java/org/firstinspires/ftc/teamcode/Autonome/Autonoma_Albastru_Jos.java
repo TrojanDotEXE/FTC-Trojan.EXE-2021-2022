@@ -35,7 +35,7 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma
             //2.2': mergi pana la carusel cu spatele
 
             //Segment 3 : Da o ratusca jos
-            carusel(p, r);
+            caruselDreapta(p, r);
 
             //Segment 4 : Dute la depozit si ia freight
             //4.1: intoarce te 180 grade

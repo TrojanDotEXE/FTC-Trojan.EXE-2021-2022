@@ -34,7 +34,7 @@ public class Autonoma_Rosu_Jos extends TemplateAutonoma
             //drive(-p,-r);
 
             //Segment 3 : Da o ratusca jos
-            carusel(p,r);
+            caruselDreapta(p,r);
 
             //Segment 4 : Dute la depozit si ia freight
             //4.1 intoarcete 180 dreapta
