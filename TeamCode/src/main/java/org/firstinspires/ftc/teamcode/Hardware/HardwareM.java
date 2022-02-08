@@ -47,7 +47,7 @@ public class HardwareM extends LinearOpMode
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S, caruselStanga);                                                             //set Directions Reverse
-        setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);    //set encoders
+        setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
         setDirections(Servo.Direction.FORWARD, leftClaw);
         setDirections(Servo.Direction.REVERSE, rightClaw);
@@ -75,9 +75,35 @@ public class HardwareM extends LinearOpMode
         rightClaw.setPosition(0);
     }
 
+    private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setDirection(d);
+    }
+
     private void setDirections(Servo.Direction d, Servo ... servos) {
         for (Servo s:servos)
             s.setDirection(d);
+    }
+
+    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setZeroPowerBehavior(mode);
+    }
+
+    private void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setMode(mode);
+    }
+
+    public void resetEncoders() {
+        roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brat_S.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brat_D.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        brat_Scripete.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        caruselDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        caruselStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     public void goToPosition(double p, int r, DcMotor ... motors) {  //TODO: Drive by encoder pushbot
@@ -92,21 +118,6 @@ public class HardwareM extends LinearOpMode
     public void goToPosition(double p, int rs, int rd, DcMotor motor1, DcMotor motor2) {
         goToPosition(1, rs, motor1);
         goToPosition(.5, rd, motor2);
-    }
-
-    private void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setMode(mode);
-    }
-
-    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setZeroPowerBehavior(mode);
-    }
-
-    private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setDirection(d);
     }
 
     @Override

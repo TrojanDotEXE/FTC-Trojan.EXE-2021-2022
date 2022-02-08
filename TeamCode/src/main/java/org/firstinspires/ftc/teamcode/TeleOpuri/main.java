@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
@@ -24,11 +25,12 @@ public class main extends OpMode
      * <ul><li> <b>fata spate</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - left_stick_y </li>
      *     <li> <b>stanga dreapta</b> - right_stick_x</li>
      *     <li> <b>carusel dreapta</b> - right_bumper </li>
-     *     <li> <b>carusel stanga</b>&nbsp; - left_bumper </li></ul>
+     *     <li> <b>carusel stanga</b>&nbsp; - left_bumper </li>
+     *     <li> <b>reset encoder *</b> - x </li></ul>
      * <h1>Gamepad 2</h1>
      * <ul><li> <b>brat sus-jos</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - left_stick_y (<b>1 = jos</b>, <b>-1 = sus</b>)</li>
      *     <li> <b>scripete fata-spate</b> - right_stick_y (<b>1 = fata</b>, <b>-1 = spate</b>)</li>
-     *     <li> <b>cleste deschidere</b>&nbsp;&nbsp; - a</li>
+     *     <li> <b>cleste deschidere</b>&nbsp;&nbsp; - left_bumper</li>
      *     <li> <b>slowmode brat</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - b</li></ul></ul>
      */
 
@@ -53,6 +55,11 @@ public class main extends OpMode
             fer.caruselStanga.setPower(1);
 
         fer.caruselDreapta.setPower(0);
+        fer.caruselStanga.setPower(0);
+
+        //Reset encoders
+        if(gamepad1.x)
+            fer.resetEncoders();
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -70,13 +77,16 @@ public class main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
-        if(gamepad2.a)
+        if(gamepad2.left_bumper)
         {
             fer.leftClaw.setPosition(servo_deschis);
             fer.rightClaw.setPosition(servo_deschis);
         }
         fer.leftClaw.setPosition(servo_inchis);
         fer.rightClaw.setPosition(servo_inchis);
+
+        telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
+        telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
 
         telemetry.addData("Run Time: ", getRuntime());
     }
