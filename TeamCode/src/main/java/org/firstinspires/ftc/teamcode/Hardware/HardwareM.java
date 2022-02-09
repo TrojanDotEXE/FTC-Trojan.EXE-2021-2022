@@ -37,12 +37,11 @@ public class HardwareM extends LinearOpMode
         brat_S         = hardwaremap.get(DcMotor.class, "motorS");
         brat_D         = hardwaremap.get(DcMotor.class, "motorD");
         brat_Scripete  = hardwaremap.get(DcMotor.class, "motorScripete");
-        peria          = hardwaremap.get(DcMotor.class, "motorPeria");
         caruselDreapta = hardwaremap.get(DcMotor.class, "motorCaruselD");
         caruselStanga  = hardwaremap.get(DcMotor.class, "motorCaruselS");
 
-        leftClaw  = hardwaremap.get(Servo.class, "servoLeft");
-        rightClaw = hardwaremap.get(Servo.class, "servoRight");
+        leftClaw  = hardwaremap.get(Servo.class, "leftClaw");
+        rightClaw = hardwaremap.get(Servo.class, "rightClaw");
 
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta);                            //set Directions Forward
