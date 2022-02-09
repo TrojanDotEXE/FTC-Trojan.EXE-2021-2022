@@ -43,10 +43,10 @@ public class HardwareM extends LinearOpMode
         leftClaw  = hardwaremap.get(Servo.class, "leftClaw");
         rightClaw = hardwaremap.get(Servo.class, "rightClaw");
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);               //set 0 Behaivior
-        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta);                            //set Directions Forward
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
+        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S, caruselStanga);                                                             //set Directions Reverse
-        setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, peria, caruselDreapta, caruselStanga);    //set encoders
+        setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
         setDirections(Servo.Direction.FORWARD, leftClaw);
         setDirections(Servo.Direction.REVERSE, rightClaw);
@@ -59,7 +59,6 @@ public class HardwareM extends LinearOpMode
         brat_S.setPower(0);
         brat_D.setPower(0);
         brat_Scripete.setPower(0);
-        peria.setPower(0);
         caruselDreapta.setPower(0);
         caruselStanga.setPower(0);
     }
@@ -100,7 +99,6 @@ public class HardwareM extends LinearOpMode
         brat_S.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brat_D.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         brat_Scripete.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        peria.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         caruselDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         caruselStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
