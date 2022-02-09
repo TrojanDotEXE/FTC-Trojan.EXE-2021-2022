@@ -44,7 +44,7 @@ public class Autonoma_Rosu_Jos extends TemplateAutonoma
             //4.3 lasa bratul jos
             brat(p,r);
             //4.4 activeaza peria
-            peria(p,r);
+
             //4.5 mergi putin in fata pentru a lua freight
             drive(p,r);
 
@@ -63,7 +63,7 @@ public class Autonoma_Rosu_Jos extends TemplateAutonoma
             //5.5: extinde brat
             scripete(p,r);
             //5.6 pune freightul pe stratul de jos
-            peria(-p,-r);
+
             //5.7 retrage brat
             scripete(-p,-r);
 

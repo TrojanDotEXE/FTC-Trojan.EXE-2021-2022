@@ -45,7 +45,7 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma
             //4.3: lasa bratul jos
             brat(p,r);
             //4.4: activeaza peria
-            peria(p,r);
+
             //mergi putin in fata pentru a lua freight
             drive(p,r);
 
@@ -73,7 +73,7 @@ public class Autonoma_Albastru_Jos extends TemplateAutonoma
             //6.4: lasa bratul jos
             brat (-p,r);
             //6.5: activeaza peria si mergi putin in fata pentru a lua freight
-            peria(p, r);
+
             //6.6: se repeta  segment 5
             drive (p, r);
 

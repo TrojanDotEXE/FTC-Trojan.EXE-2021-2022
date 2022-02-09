@@ -25,7 +25,7 @@ public class Autonoma_Albastru_Sus extends TemplateAutonoma
         //1.3: lasa bratul jos
         brat(p,r);
         //1.4: activeaza peria
-        peria(p,r);
+
         //1.5 mergi putin in fata pentru a lua freight
         drive(p,r);
 
@@ -49,7 +49,7 @@ public class Autonoma_Albastru_Sus extends TemplateAutonoma
         //2.9: extinde brat
         scripete(p,r);
         //pune freightul pe stratul de jos
-        peria(-p,-r);
+
         //retrage brat
         scripete(-p,-r);
 
@@ -61,7 +61,7 @@ public class Autonoma_Albastru_Sus extends TemplateAutonoma
         //3.3: lasa bratul jos
         brat(p,r);
         //3.4: activeaza peria
-        peria(p,r);
+
         //mergi putin in fata pentru a lua freight
         drive(p,r);
         //3.5: merg cu spatele pana la A3
@@ -71,7 +71,7 @@ public class Autonoma_Albastru_Sus extends TemplateAutonoma
         //3.7: extinde brat
         scripete(p,r);
         //pune freightul pe stratul de jos
-        peria(-p,-r);
+
         //retrage scripete
         scripete(-p,-r);
 
