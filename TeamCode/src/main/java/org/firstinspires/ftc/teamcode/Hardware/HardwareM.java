@@ -11,8 +11,8 @@ public class HardwareM extends LinearOpMode
     public DcMotor roataStanga    = null, roataDreapta  = null; //Motoare fata
     public DcMotor brat_S         = null, brat_D        = null, //Motoare brat
                    brat_Scripete  = null;
-    public DcMotor caruselDreapta = null, caruselStanga = null,
-                   peria          = null; //Altele
+    public DcMotor caruselDreapta = null, caruselStanga = null;
+
 
     public Servo leftClaw = null, rightClaw = null;
 
