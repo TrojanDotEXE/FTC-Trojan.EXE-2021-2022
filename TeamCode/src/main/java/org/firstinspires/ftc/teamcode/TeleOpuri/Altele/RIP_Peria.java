@@ -23,16 +23,16 @@ public class RIP_Peria extends OpMode {
     @Override
     public void loop() {
                 //Peria
-                if(gamepad2.left_bumper) {
-                    fer.peria.setPower(1);
-                    telemetry.addData("Perie","Spate");
-                }
-                else if(gamepad2.right_bumper) {
-                    fer.peria.setPower(-1);
-                    telemetry.addData("Perie","Fata");
-                }
-                fer.peria.setPower(0);
-                telemetry.addData("Perie","Oprita");
+//                if(gamepad2.left_bumper) {
+//                    fer.peria.setPower(1);
+//                    telemetry.addData("Perie","Spate");
+//                }
+//                else if(gamepad2.right_bumper) {
+//                    fer.peria.setPower(-1);
+//                    telemetry.addData("Perie","Fata");
+//                }
+//                fer.peria.setPower(0);
+//                telemetry.addData("Perie","Oprita");
         }
 }
 
