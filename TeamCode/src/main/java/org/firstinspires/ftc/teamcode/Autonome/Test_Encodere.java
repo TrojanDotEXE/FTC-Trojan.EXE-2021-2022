@@ -32,7 +32,7 @@ public class Test_Encodere extends LinearOpMode
             fer.roataStanga.setPower(-.3);
             fer.roataDreapta.setPower(-.3);
 
-            while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy())){
+            while(opModeIsActive() && (fer.roataStanga.isBusy() && fer.roataDreapta.isBusy())){
                 telemetry.addData("Rotatii Stanga/Dreapta", "%7d / %7d",
                                     fer.roataStanga.getCurrentPosition(),
                                     fer.roataDreapta.getCurrentPosition());
