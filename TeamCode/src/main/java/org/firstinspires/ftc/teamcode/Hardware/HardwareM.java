@@ -113,8 +113,8 @@ public class HardwareM extends LinearOpMode
     }
 
     public void goToPosition(double p, int rs, int rd, DcMotor motor1, DcMotor motor2) {
-        goToPosition(1, rs, motor1);
-        goToPosition(.5, rd, motor2);
+        goToPosition(p, rs, motor1);
+        goToPosition(p/2, rd, motor2);
     }
 
     @Override

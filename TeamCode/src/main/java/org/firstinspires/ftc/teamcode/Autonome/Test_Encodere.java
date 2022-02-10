@@ -20,17 +20,17 @@ public class Test_Encodere extends LinearOpMode
             fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-            fer.roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            fer.roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            fer.roataStanga.setTargetPosition(1120);
-            fer.roataDreapta.setTargetPosition(1120);
-
-            fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            fer.roataStanga.setTargetPosition(-1120);
+            fer.roataDreapta.setTargetPosition(-1120);
 
             fer.roataStanga.setPower(-.3);
             fer.roataDreapta.setPower(-.3);
+
+            fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             while(opModeIsActive() && (fer.roataStanga.isBusy() && fer.roataDreapta.isBusy())){
                 telemetry.addData("Rotatii Stanga/Dreapta", "%7d / %7d",            //%7d = afiseaza primele 7 cifre (digits)
@@ -38,6 +38,7 @@ public class Test_Encodere extends LinearOpMode
                                     fer.roataDreapta.getCurrentPosition());
                 telemetry.update();
             }
+
             fer.roataStanga.setPower(0);
             fer.roataDreapta.setPower(0);
 
