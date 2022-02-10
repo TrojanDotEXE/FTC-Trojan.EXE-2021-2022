@@ -33,7 +33,7 @@ public class Test_Encodere extends LinearOpMode
             fer.roataDreapta.setPower(-.3);
 
             while(opModeIsActive() && (fer.roataStanga.isBusy() && fer.roataDreapta.isBusy())){
-                telemetry.addData("Rotatii Stanga/Dreapta", "%7d / %7d",
+                telemetry.addData("Rotatii Stanga/Dreapta", "%7d / %7d",            //%7d = afiseaza primele 7 cifre (digits)
                                     fer.roataStanga.getCurrentPosition(),
                                     fer.roataDreapta.getCurrentPosition());
                 telemetry.update();
