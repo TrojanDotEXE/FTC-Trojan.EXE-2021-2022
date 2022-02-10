@@ -29,10 +29,6 @@ public class Test_Encodere extends LinearOpMode
             fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            telemetry.addData("Rotatii Stanga", fer.roataStanga.getCurrentPosition());
-            telemetry.addData("Rotatii Dreapta", fer.roataDreapta.getCurrentPosition());
-            telemetry.update();
-
             while(fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()){
                 telemetry.addData("Rotatii Stanga", fer.roataStanga.getCurrentPosition());
                 telemetry.addData("Rotatii Dreapta", fer.roataDreapta.getCurrentPosition());
