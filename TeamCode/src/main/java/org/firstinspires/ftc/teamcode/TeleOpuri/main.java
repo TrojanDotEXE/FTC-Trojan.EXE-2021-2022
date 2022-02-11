@@ -76,14 +76,19 @@ public class  main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
-        if (gamepad1.right_bumper)
+        if (gamepad2.right_bumper)
             clawOffset += CLAW_SPEED;
-        else if (gamepad1.left_bumper)
+        else if (gamepad2.left_bumper)
             clawOffset -= CLAW_SPEED;
 
-        clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+        clawOffset = Range.clip(clawOffset, -1, 1);
         fer.leftClaw.setPosition(fer.MID_SERVO + clawOffset);
         fer.rightClaw.setPosition(fer.MID_SERVO - clawOffset);
+
+        if(!gamepad1.right_bumper && !gamepad2) {
+            fer.leftClaw.setPosition(fer.MID_SERVO);
+            fer.leftClaw.setPosition(fer.MID_SERVO);
+        }
 
         //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
         //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
