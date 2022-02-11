@@ -78,9 +78,6 @@ public class  main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
-        fer.leftClaw.setPosition(0);
-        fer.rightClaw.setPosition(0);
-
         if(gamepad2.left_bumper)
         {
             fer.leftClaw.setPosition(servo_deschis);
