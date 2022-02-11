@@ -21,7 +21,7 @@ public class Test_Encodere extends LinearOpMode
         roataDreapta.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Wait for start while displaying encoder values  (Note: these may not start at zero)
-        // This is just for testing
+        // This i   s just for testing
         while(!isStarted()) {
             telemetry.addData("LeftPosition", roataStanga.getCurrentPosition());
             telemetry.addData("RightPosition", roataDreapta.getCurrentPosition());
@@ -36,7 +36,7 @@ public class Test_Encodere extends LinearOpMode
         roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        // Set target position and speed
+        // Set target position and speedloin
         roataStanga.setTargetPosition(1440);
         roataDreapta.setTargetPosition(1440);
 
