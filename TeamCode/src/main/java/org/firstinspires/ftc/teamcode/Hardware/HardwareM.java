@@ -33,7 +33,7 @@ public class HardwareM extends LinearOpMode
     public static final int REV_COREHEX_TICKS_PER_INCH = (int)((REV_COREHEX_TICK_COUNTS)/circumferintaRoata);
     public static final int SCRIPETE_TICKS_PER_INCH    = (int)(TETRIX_TICK_COUNTS/circumferintaScripete);
 
-    private ElapsedTime runtime = new ElapsedTime();     //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
+    //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
 
     public void init (HardwareMap hardwaremap){
         roataStanga    = hardwaremap.get(DcMotor.class, "motorStanga");   //Motoare
@@ -53,6 +53,7 @@ public class HardwareM extends LinearOpMode
         setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
         leftClaw.setDirection(DcMotorSimple.Direction.REVERSE);
+        //leftClaw.setDirection();
         stopServos();
     }
 

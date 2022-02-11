@@ -37,7 +37,7 @@ public class Test_Encodere extends LinearOpMode
         roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Set target position and speedloin
-        roataStanga.setTargetPosition(1440);
+        roataStanga.setTargetPosition(1440);    //10 * NEVEREST40_TICKS_PER_INCH
         roataDreapta.setTargetPosition(1440);
 
         // Prepare to drive to target position
@@ -49,18 +49,16 @@ public class Test_Encodere extends LinearOpMode
 
         // Loop while we approach the target.  Display position as we go
         while(roataDreapta.isBusy() && roataStanga.isBusy() && opModeIsActive()) {
-            telemetry.addData("LeftPosition", roataStanga.getCurrentPosition());
-            telemetry.addData("LeftTarget", roataStanga.getTargetPosition());
-            telemetry.addData("RightPosition", roataDreapta.getCurrentPosition());
-            telemetry.addData("RightTarget", roataDreapta.getTargetPosition());
+            telemetry.addData("Left Position / Target :", "%7d / %7d",
+                              roataStanga.getCurrentPosition(), roataStanga.getTargetPosition());
+            telemetry.addData("Right Position / Target :", "%7d / %7d",
+                              roataDreapta.getCurrentPosition(), roataDreapta.getTargetPosition());
             telemetry.update();
         }
 
         // We are done, turn motors off and switch back to normal driving mode.
         roataStanga.setPower(0);
         roataDreapta.setPower(0);
-        roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 

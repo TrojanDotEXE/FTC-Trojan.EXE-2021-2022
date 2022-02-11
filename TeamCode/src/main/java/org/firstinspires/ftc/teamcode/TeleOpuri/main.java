@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
@@ -11,6 +10,7 @@ public class  main extends OpMode
 {
     //private ElapsedTime runtime = new ElapsedTime();
           HardwareM fer      = new HardwareM();
+          double servoMAX = 1.0, servoMIN = 0.0, pozitie = 0.0;
 
     @Override
     public void init() {
@@ -55,10 +55,6 @@ public class  main extends OpMode
         fer.caruselDreapta.setPower(0);
         fer.caruselStanga.setPower(0);
 
-        //Reset encoders
-        //if(gamepad1.x)
-            //fer.resetEncoders();
-
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
         //Brat
         if(gamepad2.b)
@@ -72,21 +68,31 @@ public class  main extends OpMode
         fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
         fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
 
+        telemetry.addData("Slowmode: ", "Dezactivat");
+
         if(gamepad2.left_bumper) {
-            fer.leftClaw.setPower(.5);
-            fer.rightClaw.setPower(.5);
+            fer.leftClaw.setPower(.75);
+            fer.rightClaw.setPower(.75);
         }
         else if(gamepad2.right_bumper) {
-            fer.leftClaw.setPower(-.5);
-            fer.rightClaw.setPower(-.5);
+            fer.leftClaw.setPower(.25);
+            fer.rightClaw.setPower(.25);
         }
         fer.leftClaw.setPower(0);
         fer.rightClaw.setPower(0);
 
-        telemetry.addData("Slowmode: ", "Dezactivat");
+        //if (gamepad2.left_bumper && pozitie < servoMAX) pozitie = pozitie + .01;
+        //if (gamepad1.right_bumper && pozitie > servoMIN ) pozitie = pozitie - .01;
 
-        //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
-        //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
+        //fer.leftClaw.setPosition(Range.clip(pozitie, servoMIN, servoMAX));
+        //fer.rightClaw.setPosition(Range.clip(pozitie, servoMIN, servoMAX));
+
+        //if (gamepad1.right_bumper)
+        //    fer.leftClaw.setPosition(1);
+        //    fer.rightClaw.setPosition(1);
+        //if (gamepad2.left_bumper)
+        //    fer.leftClaw.setPosition(0);
+        //    fer.rightClaw.setPosition(0);
 
         telemetry.addData("Run Time: ", getRuntime());
     }
