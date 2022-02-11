@@ -3,47 +3,63 @@ package org.firstinspires.ftc.teamcode.Autonome;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @Autonomous(name = "Test Encodere")
 public class Test_Encodere extends LinearOpMode
 {
-    HardwareM fer = new HardwareM();
-
+    DcMotor roataStanga = null, roataDreapta = null;
+    private ElapsedTime runtime = new ElapsedTime();
     @Override
     public void runOpMode() throws InterruptedException {
-        waitForStart();
-        while(opModeIsActive())
-        {
-            fer.init(hardwareMap);
-            fer.roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            fer.roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        roataStanga = hardwareMap.get(DcMotor.class, "motorStanga");
+        roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
+        roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
+        roataDreapta.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//            fer.roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // Wait for start while displaying encoder values  (Note: these may not start at zero)
+        // This is just for testing
+        while(!isStarted()) {
+            telemetry.addData("LeftPosition", roataStanga.getCurrentPosition());
+            telemetry.addData("RightPosition", roataDreapta.getCurrentPosition());
+            telemetry.update();
+        }
 
-            fer.roataStanga.setTargetPosition(-1120);
-            fer.roataDreapta.setTargetPosition(-1120);
+        // We are now running opmode
+        // Start clock at zero
+        runtime.reset();
 
-            fer.roataStanga.setPower(-.3);
-            fer.roataDreapta.setPower(-.3);
+        // Reset encoders
+        roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-            fer.roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        // Prepare to drive to target position
+        roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            while(opModeIsActive() && (fer.roataStanga.isBusy() && fer.roataDreapta.isBusy())){
-                telemetry.addData("Rotatii Stanga/Dreapta", "%7d / %7d",            //%7d = afiseaza primele 7 cifre (digits)
-                                    fer.roataStanga.getCurrentPosition(),
-                                    fer.roataDreapta.getCurrentPosition());
-                telemetry.update();
-            }
+        // Set target position and speed
+        roataStanga.setTargetPosition(1440);
+        roataDreapta.setTargetPosition(1440);
+        roataStanga.setPower(1.0);
+        roataDreapta.setPower(1.0);
 
-            fer.roataStanga.setPower(0);
-            fer.roataDreapta.setPower(0);
+        // Loop while we approach the target.  Display position as we go
+        while(roataDreapta.isBusy() && roataStanga.isBusy() && opModeIsActive()) {
+            telemetry.addData("LeftPosition", roataStanga.getCurrentPosition());
+            telemetry.addData("LeftTarget", roataStanga.getTargetPosition());
+            telemetry.addData("RightPosition", roataDreapta.getCurrentPosition());
+            telemetry.addData("RightTarget", roataDreapta.getTargetPosition());
+            telemetry.update();
+        }
 
-            fer.roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            fer.roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // We are done, turn motors off and switch back to normal driving mode.
+        roataStanga.setPower(0);
+        roataDreapta.setPower(0);
+        roataDreapta.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        roataStanga.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
-}
+
