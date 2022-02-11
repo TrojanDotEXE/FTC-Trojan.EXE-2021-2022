@@ -46,7 +46,7 @@ public class HardwareM extends LinearOpMode
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S, caruselStanga);                                                             //set Directions Reverse
-        setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
+        setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
         setDirections(Servo.Direction.FORWARD, leftClaw);
         setDirections(Servo.Direction.REVERSE, rightClaw);

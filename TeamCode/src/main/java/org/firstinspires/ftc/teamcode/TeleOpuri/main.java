@@ -58,8 +58,8 @@ public class  main extends OpMode
         fer.caruselStanga.setPower(0);
 
         //Reset encoders
-        if(gamepad1.x)
-            fer.resetEncoders();
+        //if(gamepad1.x)
+            //fer.resetEncoders();
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,8 +85,8 @@ public class  main extends OpMode
         fer.leftClaw.setPosition(servo_inchis);
         fer.rightClaw.setPosition(servo_inchis);
 
-        telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
-        telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
+        //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
+        //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
 
         telemetry.addData("Run Time: ", getRuntime());
     }
