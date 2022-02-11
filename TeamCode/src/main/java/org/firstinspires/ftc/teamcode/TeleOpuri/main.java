@@ -41,6 +41,7 @@ public class  main extends OpMode
         double left, right;
         double servo_inchis  = 0;
         double servo_deschis = .5;
+        double servo_deschis1 = 1;
 
         left  = Range.clip(fata_spate - stanga_dreapta,-1,1);
         right = Range.clip(fata_spate + stanga_dreapta,-1,1);
@@ -77,13 +78,19 @@ public class  main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
+        fer.leftClaw.setPosition(0);
+        fer.rightClaw.setPosition(0);
+
         if(gamepad2.left_bumper)
         {
             fer.leftClaw.setPosition(servo_deschis);
             fer.rightClaw.setPosition(servo_deschis);
         }
-        fer.leftClaw.setPosition(servo_inchis);
-        fer.rightClaw.setPosition(servo_inchis);
+        if(gamepad2.right_bumper)
+        {
+            fer.leftClaw.setPosition(servo_deschis1);
+            fer.rightClaw.setPosition(servo_deschis1);
+        }
 
         //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
         //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
