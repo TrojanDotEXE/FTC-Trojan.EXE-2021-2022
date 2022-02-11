@@ -16,6 +16,8 @@ public class HardwareM extends LinearOpMode
 
     public Servo leftClaw = null, rightClaw = null;
 
+    public static final double MID_SERVO       =  0.5 ;
+
     public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;
@@ -48,8 +50,6 @@ public class HardwareM extends LinearOpMode
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S, caruselStanga);                                                             //set Directions Reverse
         setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
-        setDirections(Servo.Direction.FORWARD, leftClaw);
-        setDirections(Servo.Direction.REVERSE, rightClaw);
         servoReset();
     }
 
@@ -69,8 +69,8 @@ public class HardwareM extends LinearOpMode
     }
 
     private void servoReset() {
-        leftClaw.setPosition(0);
-        rightClaw.setPosition(0);
+        leftClaw.setPosition(MID_SERVO);
+        rightClaw.setPosition(MID_SERVO);
     }
 
     private void setDirections(DcMotor.Direction d,DcMotor ... motors) {

@@ -36,13 +36,14 @@ public class Test_Encodere extends LinearOpMode
         roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        // Set target position and speed
+        roataStanga.setTargetPosition(1440);
+        roataDreapta.setTargetPosition(1440);
+
         // Prepare to drive to target position
         roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        // Set target position and speed
-        roataStanga.setTargetPosition(1440);
-        roataDreapta.setTargetPosition(1440);
         roataStanga.setPower(1.0);
         roataDreapta.setPower(1.0);
 

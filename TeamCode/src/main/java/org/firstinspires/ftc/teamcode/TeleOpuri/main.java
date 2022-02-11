@@ -10,7 +10,9 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 public class  main extends OpMode
 {
     //private ElapsedTime runtime = new ElapsedTime();
-            HardwareM fer = new HardwareM();
+          HardwareM fer      = new HardwareM();
+    final double CLAW_SPEED  = 0.02;
+          double clawOffset  = 0.0;
 
     @Override
     public void init() {
@@ -39,9 +41,6 @@ public class  main extends OpMode
         double fata_spate     = gamepad1.left_stick_y;
         double stanga_dreapta = gamepad1.right_stick_x;
         double left, right;
-        double servo_inchis  = 0;
-        double servo_deschis = .5;
-        double servo_deschis1 = 1;
 
         left  = Range.clip(fata_spate - stanga_dreapta,-1,1);
         right = Range.clip(fata_spate + stanga_dreapta,-1,1);
@@ -63,7 +62,6 @@ public class  main extends OpMode
             //fer.resetEncoders();
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
-
         //Brat
         if(gamepad2.b)
         {
@@ -78,16 +76,14 @@ public class  main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
-        if(gamepad2.left_bumper)
-        {
-            fer.leftClaw.setPosition(servo_deschis);
-            fer.rightClaw.setPosition(servo_deschis);
-        }
-        if(gamepad2.right_bumper)
-        {
-            fer.leftClaw.setPosition(servo_deschis1);
-            fer.rightClaw.setPosition(servo_deschis1);
-        }
+        if (gamepad1.right_bumper)
+            clawOffset += CLAW_SPEED;
+        else if (gamepad1.left_bumper)
+            clawOffset -= CLAW_SPEED;
+
+        clawOffset = Range.clip(clawOffset, -0.5, 0.5);
+        fer.leftClaw.setPosition(fer.MID_SERVO + clawOffset);
+        fer.rightClaw.setPosition(fer.MID_SERVO - clawOffset);
 
         //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
         //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
