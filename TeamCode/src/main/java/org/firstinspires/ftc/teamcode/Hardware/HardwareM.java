@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -14,7 +16,7 @@ public class HardwareM extends LinearOpMode
     public DcMotor caruselDreapta = null, caruselStanga = null;
 
 
-    public Servo leftClaw = null, rightClaw = null;
+    public CRServo leftClaw = null, rightClaw = null;
 
     public static final double MID_SERVO       =  0.5 ;
 
@@ -42,15 +44,16 @@ public class HardwareM extends LinearOpMode
         caruselDreapta = hardwaremap.get(DcMotor.class, "motorCaruselD");
         caruselStanga  = hardwaremap.get(DcMotor.class, "motorCaruselS");
 
-        leftClaw  = hardwaremap.get(Servo.class, "leftClaw");
-        rightClaw = hardwaremap.get(Servo.class, "rightClaw");
+        leftClaw  = hardwaremap.get(CRServo.class, "leftClaw");
+        rightClaw = hardwaremap.get(CRServo.class, "rightClaw");
 
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_S, caruselStanga);                                                             //set Directions Reverse
         setEncoderMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);    //set encoders
         stopMotors();   //setPower 0
-        servoReset();
+        leftClaw.setDirection(DcMotorSimple.Direction.REVERSE);
+        stopServos();
     }
 
     public void stopMotors() {
@@ -68,19 +71,14 @@ public class HardwareM extends LinearOpMode
             m.setPower(0);
     }
 
-    private void servoReset() {
-        leftClaw.setPosition(MID_SERVO);
-        rightClaw.setPosition(MID_SERVO);
+    private void stopServos() {
+        leftClaw.setPower(0);
+        rightClaw.setPower(0);
     }
 
     private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setDirection(d);
-    }
-
-    private void setDirections(Servo.Direction d, Servo ... servos) {
-        for (Servo s:servos)
-            s.setDirection(d);
     }
 
     private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {

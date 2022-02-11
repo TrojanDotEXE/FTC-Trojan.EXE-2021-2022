@@ -11,8 +11,6 @@ public class  main extends OpMode
 {
     //private ElapsedTime runtime = new ElapsedTime();
           HardwareM fer      = new HardwareM();
-    final double CLAW_SPEED  = 0.02;
-          double clawOffset  = 0.0;
 
     @Override
     public void init() {
@@ -74,21 +72,18 @@ public class  main extends OpMode
         fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
         fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
 
-        telemetry.addData("Slowmode: ", "Dezactivat");
-
-        if (gamepad2.right_bumper)
-            clawOffset += CLAW_SPEED;
-        else if (gamepad2.left_bumper)
-            clawOffset -= CLAW_SPEED;
-
-        clawOffset = Range.clip(clawOffset, -1, 1);
-        fer.leftClaw.setPosition(fer.MID_SERVO + clawOffset);
-        fer.rightClaw.setPosition(fer.MID_SERVO - clawOffset);
-
-        if(!gamepad1.right_bumper || !gamepad2.left_bumper) {
-            fer.leftClaw.setPosition(fer.MID_SERVO);
-            fer.leftClaw.setPosition(fer.MID_SERVO);
+        if(gamepad2.left_bumper) {
+            fer.leftClaw.setPower(.5);
+            fer.rightClaw.setPower(.5);
         }
+        else if(gamepad2.right_bumper) {
+            fer.leftClaw.setPower(-.5);
+            fer.rightClaw.setPower(-.5);
+        }
+        fer.leftClaw.setPower(0);
+        fer.rightClaw.setPower(0);
+
+        telemetry.addData("Slowmode: ", "Dezactivat");
 
         //telemetry.addData("Roata stanga", fer.roataStanga.getCurrentPosition());
         //telemetry.addData("Roata dreapta", fer.roataDreapta.getCurrentPosition());
