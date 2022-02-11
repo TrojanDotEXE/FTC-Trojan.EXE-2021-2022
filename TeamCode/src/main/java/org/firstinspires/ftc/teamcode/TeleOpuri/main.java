@@ -85,7 +85,7 @@ public class  main extends OpMode
         fer.leftClaw.setPosition(fer.MID_SERVO + clawOffset);
         fer.rightClaw.setPosition(fer.MID_SERVO - clawOffset);
 
-        if(!gamepad1.right_bumper || !gamepad2.left_bumper) {
+        if(!gamepad2.right_bumper || !gamepad2.left_bumper) {
             fer.leftClaw.setPosition(fer.MID_SERVO);
             fer.leftClaw.setPosition(fer.MID_SERVO);
         }
