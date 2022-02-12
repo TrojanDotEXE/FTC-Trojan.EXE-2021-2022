@@ -17,13 +17,8 @@ public class Test_Encodere extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException {
         roataStanga = hardwareMap.get(DcMotor.class, "motorStanga");
-        roataStanga.setDirection(DcMotorSimple.Direction.FORWARD);
         roataDreapta = hardwareMap.get(DcMotor.class, "motorDreapta");
-        roataDreapta.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        // Wait for start while displaying encoder values  (Note: these may not start at zero)
-        // This i   s just for testing
-        waitForStart();
+        roataStanga.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Reset encoders
         roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -37,6 +32,8 @@ public class Test_Encodere extends LinearOpMode
         roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        waitForStart();
+
         roataStanga.setPower(.3);
         roataDreapta.setPower(.3);
 
@@ -47,6 +44,7 @@ public class Test_Encodere extends LinearOpMode
             telemetry.addData("Right Position / Target :", "%7d / %7d",
                               roataDreapta.getCurrentPosition(), roataDreapta.getTargetPosition());
             telemetry.update();
+            idle();
         }
 
         // We are done, turn motors off and switch back to normal driving mode.
