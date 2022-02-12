@@ -31,11 +31,11 @@ public class Test_Encodere extends LinearOpMode
         roataStanga.setTargetPosition(roataStanga.getCurrentPosition()+1440);    //10 * NEVEREST40_TICKS_PER_INCH
         roataDreapta.setTargetPosition(roataDreapta.getCurrentPosition()+1440);
 
+        waitForStart();
+
         // Prepare to drive to target position
         roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        waitForStart();
 
         roataStanga.setPower(.3);
         roataDreapta.setPower(.3);
