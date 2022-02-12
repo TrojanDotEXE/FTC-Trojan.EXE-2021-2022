@@ -79,8 +79,10 @@ public class  main extends OpMode
             fer.leftClaw.setPower(-.75);
             fer.rightClaw.setPower(-.75);
         }
-        fer.leftClaw.setPower(0);
-        fer.rightClaw.setPower(0);
+        else {
+            fer.leftClaw.setPower(0);
+            fer.rightClaw.setPower(0);
+        }
 
         //Varianta 2
         //if (gamepad2.left_bumper && pozitie < servoMAX) pozitie = pozitie + .01;
