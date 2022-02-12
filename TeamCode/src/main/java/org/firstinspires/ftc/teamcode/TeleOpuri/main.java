@@ -76,8 +76,8 @@ public class  main extends OpMode
             fer.rightClaw.setPower(.75);
         }
         else if(gamepad2.right_bumper) {
-            fer.leftClaw.setPower(.25);
-            fer.rightClaw.setPower(.25);
+            fer.leftClaw.setPower(-.75);
+            fer.rightClaw.setPower(-.75);
         }
         fer.leftClaw.setPower(0);
         fer.rightClaw.setPower(0);
