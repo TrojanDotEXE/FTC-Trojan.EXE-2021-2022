@@ -16,7 +16,7 @@ public class HardwareM extends LinearOpMode
     public DcMotor caruselDreapta = null, caruselStanga = null;
 
 
-    public CRServo leftClaw = null, rightClaw = null;
+    public CRServo leftClaw = null, rightClaw = null;   //schimbati in Servo daca folositi celelalte variante
 
     public static final double MID_SERVO       =  0.5 ;
 
