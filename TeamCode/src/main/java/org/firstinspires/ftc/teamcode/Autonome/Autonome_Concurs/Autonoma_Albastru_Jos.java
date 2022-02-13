@@ -1,10 +1,13 @@
-package org.firstinspires.ftc.teamcode.Autonome;
+package org.firstinspires.ftc.teamcode.Autonome.Autonome_Concurs;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
+import org.firstinspires.ftc.teamcode.Autonome.TemplateAutonoma;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @Autonomous(name = "Albastru_Jos", group = "Autonome")
+@Disabled
 public class Autonoma_Albastru_Jos extends TemplateAutonoma
 {
     HardwareM fer = new HardwareM();

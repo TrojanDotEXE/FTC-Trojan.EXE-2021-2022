@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
-public class  main extends OpMode
+public class main extends OpMode
 {
     //private ElapsedTime runtime = new ElapsedTime();
           HardwareM fer      = new HardwareM();
