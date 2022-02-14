@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous(name = "Test #1", group = "Teste")
-public class Test_Encodere extends LinearOpMode
+public class Test_1 extends LinearOpMode
 {
     DcMotor leftWheel = null,
             rightWheel = null;
@@ -17,6 +17,8 @@ public class Test_Encodere extends LinearOpMode
         rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
         leftWheel.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        waitForStart();
+
         rightWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -26,13 +28,11 @@ public class Test_Encodere extends LinearOpMode
         leftWheel.setTargetPosition(1440);
         rightWheel.setTargetPosition(1440);
 
-        rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        waitForStart();
-
         leftWheel.setPower(.3);
         rightWheel.setPower(.3);
+
+        rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         while(opModeIsActive() && (rightWheel.isBusy() || leftWheel.isBusy())) {
             telemetry.addData("Left Position / Target :", "%7d / %7d",

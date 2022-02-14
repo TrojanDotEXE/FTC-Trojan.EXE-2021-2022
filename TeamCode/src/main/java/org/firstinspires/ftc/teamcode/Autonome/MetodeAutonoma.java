@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Autonome;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
-public class TemplateAutonoma extends LinearOpMode {
+public class MetodeAutonoma extends LinearOpMode {
     HardwareM fer = new HardwareM();
 
     @Override

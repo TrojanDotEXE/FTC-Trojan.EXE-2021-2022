@@ -17,6 +17,8 @@ public class Test_2 extends LinearOpMode
         rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
         leftWheel.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        waitForStart();
+
         rightWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -29,8 +31,6 @@ public class Test_2 extends LinearOpMode
         rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        waitForStart();
-
         leftWheel.setPower(.3);
         rightWheel.setPower(.3);
 
@@ -40,7 +40,6 @@ public class Test_2 extends LinearOpMode
             telemetry.addData("Right Position / Target :", "%7d / %7d",
                     rightWheel.getCurrentPosition(), rightWheel.getTargetPosition());
             telemetry.update();
-            idle();
         }
 
         leftWheel.setPower(0);
