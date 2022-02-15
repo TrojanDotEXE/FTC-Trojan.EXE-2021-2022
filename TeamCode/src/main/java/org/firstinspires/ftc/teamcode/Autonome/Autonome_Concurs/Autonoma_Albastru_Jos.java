@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Autonome.Autonome_Concurs;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-
 import org.firstinspires.ftc.teamcode.Autonome.MetodeAutonoma;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 

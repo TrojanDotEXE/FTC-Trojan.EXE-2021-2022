@@ -3,44 +3,93 @@ package org.firstinspires.ftc.teamcode.Autonome.Teste;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+
 
 @Autonomous(name = "Test #3", group = "Teste")
 public class Test_3 extends LinearOpMode
 {
-    DcMotor leftWheel  = null,
-            rightWheel = null;
+    HardwareM fer = new HardwareM();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        leftWheel = hardwareMap.get(DcMotor.class, "leftWheel");
-        rightWheel = hardwareMap.get(DcMotor.class, "rightWheel");
-        leftWheel.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
-        rightWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fer.goToPosition(.3,1440,fer.roataStanga,fer.roataStanga);//TODO: de rezolvat
 
-        leftWheel.setTargetPosition(1440);
-        rightWheel.setTargetPosition(1440);
-
-        rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftWheel.setPower(.3);
-        rightWheel.setPower(.3);
-
-        while(opModeIsActive() && (rightWheel.isBusy() || leftWheel.isBusy())) {
+        while (opModeIsActive() && (fer.roataDreapta.isBusy() || fer.roataStanga.isBusy())) {
             telemetry.addData("Left Position / Target :", "%7d / %7d",
-                    leftWheel.getCurrentPosition(), leftWheel.getTargetPosition());
+                    fer.roataStanga.getCurrentPosition(), fer.roataStanga.getTargetPosition());
             telemetry.addData("Right Position / Target :", "%7d / %7d",
-                    rightWheel.getCurrentPosition(), rightWheel.getTargetPosition());
+                    fer.roataDreapta.getCurrentPosition(), fer.roataDreapta.getTargetPosition());
             telemetry.update();
         }
-
-        leftWheel.setPower(0);
-        rightWheel.setPower(0);
+        fer.stopMotors(fer.roataStanga, fer.roataDreapta);
     }
 
+        public void drive (double power, int rotatii, DcMotor ... motors) {
+            for(DcMotor motor:motors)
+            {
+                fer.goToPosition(power, rotatii, motor);
+            }
+        }
+
+        public void turn (double power, int rotatiiStanga, int rotatiiDreapta) {
+            fer.goToPosition(power, rotatiiStanga, rotatiiDreapta, fer.roataStanga, fer.roataDreapta);
+
+            while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy())) {}
+            fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+        }
+
+        public void rotationD(double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.roataStanga);
+
+            while(opModeIsActive() && fer.roataStanga.isBusy()){};
+            fer.stopMotors(fer.roataStanga);
+        }
+
+        public void rotationS (double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.roataDreapta);
+
+            while(opModeIsActive() && fer.roataDreapta.isBusy()){};
+            fer.stopMotors(fer.roataDreapta);
+        }
+
+        public void brat (double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.brat_S, fer.brat_D);
+
+            while(opModeIsActive() && (fer.brat_S.isBusy() || fer.brat_D.isBusy())){}
+            fer.stopMotors(fer.brat_S, fer.brat_D);
+        }
+
+        public void scripete (double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.brat_S, fer.brat_D);
+
+            while(opModeIsActive() && (fer.brat_S.isBusy() || fer.brat_D.isBusy())){}
+            fer.stopMotors(fer.brat_S, fer.brat_D);
+        }
+
+        public void colect (double power, int rotatii, double power2, int rotatii2) {
+            fer.goToPosition(power, rotatii, fer.roataStanga, fer.roataDreapta);
+
+            while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()))
+            {}
+            fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+        }
+
+        public void caruselDreapta (double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.caruselDreapta);
+
+            while(opModeIsActive() && fer.caruselDreapta.isBusy()) {}
+            fer.stopMotors(fer.caruselDreapta);
+        }
+
+        public void caruselStanga (double power, int rotatii) {
+            fer.goToPosition(power, rotatii, fer.caruselStanga);
+
+            while(opModeIsActive() && fer.caruselStanga.isBusy()) {}
+            fer.stopMotors(fer.caruselStanga);
+        }
 }
