@@ -11,6 +11,8 @@ public class main extends OpMode
     //private ElapsedTime runtime = new ElapsedTime();
           HardwareM fer      = new HardwareM();
           double servoMAX = 1.0, servoMIN = 0.0, pozitie = 0.0;
+          //TODO: display encoder rotations and reset them on x
+          //TODO: run using encoders for better control
 
     @Override
     public void init() {
@@ -70,7 +72,6 @@ public class main extends OpMode
 
         telemetry.addData("Slowmode: ", "Dezactivat");
 
-        //Varianta 1
         if(gamepad2.left_bumper) {
             fer.leftClaw.setPower(.75);
             fer.rightClaw.setPower(.75);
@@ -83,21 +84,6 @@ public class main extends OpMode
             fer.leftClaw.setPower(0);
             fer.rightClaw.setPower(0);
         }
-
-        //Varianta 2
-        //if (gamepad2.left_bumper && pozitie < servoMAX) pozitie = pozitie + .01;
-        //if (gamepad2.right_bumper && pozitie > servoMIN ) pozitie = pozitie - .01;
-
-        //fer.leftClaw.setPosition(Range.clip(pozitie, servoMIN, servoMAX));
-        //fer.rightClaw.setPosition(Range.clip(pozitie, servoMIN, servoMAX));
-
-        //Varianta 3
-        //if (gamepad2.right_bumper)
-        //    fer.leftClaw.setPosition(1);
-        //    fer.rightClaw.setPosition(1);
-        //if (gamepad2.left_bumper)
-        //    fer.leftClaw.setPosition(0);
-        //    fer.rightClaw.setPosition(0);
 
         telemetry.addData("Run Time: ", getRuntime());
     }

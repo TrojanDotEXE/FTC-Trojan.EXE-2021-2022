@@ -102,20 +102,6 @@ public class HardwareM extends LinearOpMode
         caruselStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public void goToPosition(double p, int r, DcMotor ... motors) {  //TODO: Drive by encoder pushbot
-        for (DcMotor m:motors){
-            m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            m.setTargetPosition(r);
-            m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            m.setPower(p);
-        }
-    }
-
-    public void goToPosition(double p, int rs, int rd, DcMotor motor1, DcMotor motor2) {
-        goToPosition(p, rs, motor1);
-        goToPosition(p/2, rd, motor2);
-    }
-
     @Override
     public void runOpMode(){}
     public HardwareM(){}    //Constructor
