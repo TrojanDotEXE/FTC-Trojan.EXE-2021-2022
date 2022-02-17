@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 
 @Autonomous(name = "Test #3", group = "Teste")
-public class Test_3 extends MetodeAutonoma
+public class Autonoma_Demo_Remote extends MetodeAutonoma
 {
     HardwareM fer = new HardwareM();
 

@@ -85,6 +85,12 @@ public class main extends OpMode
             fer.rightClaw.setPower(0);
         }
 
+        if(gamepad1.x)
+            fer.resetEncoders();
+
+        telemetry.addData("Left Position: ", "%7d", fer.roataStanga.getCurrentPosition());
+        telemetry.addData("Right Position: ", "%7d", fer.roataDreapta.getCurrentPosition());
+
         telemetry.addData("Run Time: ", getRuntime());
     }
 }
