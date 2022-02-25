@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonome.Autonome_Concurs;
+package org.firstinspires.ftc.teamcode.Autonome.Traditional;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;

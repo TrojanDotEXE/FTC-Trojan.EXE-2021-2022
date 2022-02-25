@@ -72,9 +72,9 @@ public class HardwareM extends LinearOpMode
             m.setPower(0);
     }
 
-    public void stopServos() {
-        leftClaw.setPower(0);
-        rightClaw.setPower(0);
+    public void restartServos() {
+        leftClaw.setPower(1);
+        rightClaw.setPower(.8);
     }
 
     private void setDirections(DcMotor.Direction d,DcMotor ... motors) {

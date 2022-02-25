@@ -58,30 +58,32 @@ public class main extends OpMode
 
         //Carusel
         while(gamepad1.right_bumper)
-            fer.caruselDreapta.setPower(1);
+            fer.caruselDreapta.setPower(-.85);
         while (gamepad1.left_bumper)
-            fer.caruselStanga.setPower(1);
+            fer.caruselStanga.setPower(.85);
 
         fer.caruselDreapta.setPower(0);
         fer.caruselStanga.setPower(0);
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
         //Brat
+        while(gamepad2.b){
+            fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+            fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+
+        }
         fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
         fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
         fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
 
-        if(gamepad2.left_bumper) {
-            fer.leftClaw.setPower(.85);
-            fer.rightClaw.setPower(.85);
-        }
-        else if(gamepad2.right_bumper) {
-            fer.leftClaw.setPower(-.85);
-            fer.rightClaw.setPower(-.85);
+        //Cleste
+        if(gamepad2.right_bumper) {
+            fer.leftClaw.setPower(-1);
+            fer.rightClaw.setPower(-1 );
         }
         else {
-            fer.leftClaw.setPower(0);
-            fer.rightClaw.setPower(0);
+            fer.leftClaw.setPower(1);
+            fer.rightClaw.setPower(.8);
         }
 
         if(gamepad1.x)
