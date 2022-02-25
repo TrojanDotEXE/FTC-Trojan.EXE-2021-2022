@@ -21,38 +21,32 @@ public class Test_Brat extends MetodeAutonoma
         waitForStart();
         runtime.reset();
 
-        while(opModeIsActive() && runtime.milliseconds()<400){
-            fer.brat_D.setPower(.5);
-            fer.brat_S.setPower(.5);
+        while(opModeIsActive() && runtime.milliseconds()<600){
+            fer.brat_D.setPower(.2);
+            fer.brat_S.setPower(.2);
         }
         fer.brat_S.setPower(0);
         fer.brat_D.setPower(0);
 
-        telemetry.addData("Pas 1 ", "Started");
+        telemetry.addData("Timp: ", "%7d", (int)runtime.seconds());
+
         goTo(.4, -815, fer.brat_Scripete);
         while(opModeIsActive() && fer.brat_Scripete.isBusy()){}
         fer.stopMotors(fer.brat_Scripete);
-        telemetry.addData("Pas 1 ", "Finished");
 
-        telemetry.addData("Pas 2 ", "Started");
         fer.leftClaw.setPower(-1);
         fer.rightClaw.setPower(-1);
-        telemetry.addData("Pas 2 ", "Finished");
 
         sleep(1000);
 
-        telemetry.addData("Pas 3 ", "Started");
         fer.leftClaw.setPower(1);
         fer.rightClaw.setPower(.7);
-        telemetry.addData("Pas 3 ", "Finished");
 
         fer.resetEncoders(fer.brat_Scripete);
 
-        telemetry.addData("Pas 4 ", "Started");
         goTo(.4, 815, fer.brat_Scripete);
         while(opModeIsActive() && fer.brat_Scripete.isBusy()){}
         fer.stopMotors(fer.brat_Scripete);
-        telemetry.addData("Pas 4 ", "Finished");
 
         while(opModeIsActive()){}
 
