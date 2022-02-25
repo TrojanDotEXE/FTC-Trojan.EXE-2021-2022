@@ -18,7 +18,8 @@ public class HardwareM extends LinearOpMode
 
     public CRServo leftClaw = null, rightClaw = null;   //schimbati in Servo daca folositi celelalte variante
 
-    public static final double MID_SERVO       =  0.5 ;
+    public static final int MAX_SCRIPETE            =  -821 ;
+    public static final int MIN_SCRIPETE            =  -8 ;
 
     public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
@@ -50,7 +51,7 @@ public class HardwareM extends LinearOpMode
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_Scripete, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_D, caruselStanga);                                                             //set Directions Reverse
-        resetEncoders(roataDreapta, roataStanga);
+        resetEncoders(roataDreapta, roataStanga, brat_S, brat_Scripete);
         stopMotors();   //setPower 0
         leftClaw.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftClaw.setDirection();

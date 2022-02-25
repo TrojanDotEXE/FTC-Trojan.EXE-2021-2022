@@ -87,10 +87,12 @@ public class main extends OpMode
         }
 
         if(gamepad1.x)
-            fer.resetEncoders(fer.roataDreapta, fer.roataStanga);
+            fer.resetEncoders(fer.roataDreapta, fer.roataStanga, fer.brat_S, fer.brat_Scripete);
 
         telemetry.addData("Left Position: ", "%7d", fer.roataStanga.getCurrentPosition());
         telemetry.addData("Right Position: ", "%7d", fer.roataDreapta.getCurrentPosition());
+        telemetry.addData("Arm Position: ", "%7d", fer.brat_S.getCurrentPosition());
+        telemetry.addData("Scripete Position: ", "%7d", fer.brat_Scripete.getCurrentPosition());
 
         telemetry.addData("Run Time: ", "%7d", (int)runtime.seconds());
     }
