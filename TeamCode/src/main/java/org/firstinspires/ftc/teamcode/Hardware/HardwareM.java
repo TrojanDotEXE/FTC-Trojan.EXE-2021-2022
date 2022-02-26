@@ -21,6 +21,8 @@ public class HardwareM extends LinearOpMode
     public static final int MAX_SCRIPETE            =  -821 ;
     public static final int MIN_SCRIPETE            =  -8 ;
 
+    public static final int ROTIRE90    = 1980;
+
     public static final int T1 = 400;
     public static final int T2 = 600;
     public static final int T3 = 900;

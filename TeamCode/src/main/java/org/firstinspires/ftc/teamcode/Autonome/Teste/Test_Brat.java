@@ -61,7 +61,7 @@ public class Test_Brat extends MetodeAutonoma
         fer.brat_S.setPower(0);
         fer.brat_D.setPower(0);
 
-        //Asteapta pana se inchide op modul
+        //Asteapta pana se inchide op modul+
         while(opModeIsActive()){}
 
 
