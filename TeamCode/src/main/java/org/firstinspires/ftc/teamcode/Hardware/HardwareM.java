@@ -21,6 +21,10 @@ public class HardwareM extends LinearOpMode
     public static final int MAX_SCRIPETE            =  -821 ;
     public static final int MIN_SCRIPETE            =  -8 ;
 
+    public static final int T1 = 400;
+    public static final int T2 = 600;
+    public static final int T3 = 900;
+
     public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
     public static final int REV_COREHEX_TICK_COUNTS = 288;

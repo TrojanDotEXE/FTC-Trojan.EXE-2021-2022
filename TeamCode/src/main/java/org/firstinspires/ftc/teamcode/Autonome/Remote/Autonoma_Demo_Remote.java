@@ -50,7 +50,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         //Ridica bratul la nivelul 3
         runtime2.reset();
-        while(opModeIsActive() && (runtime2.milliseconds())<600){
+        while(opModeIsActive() && (runtime2.milliseconds())<HardwareM.T3){
             fer.brat_D.setPower(.2);
             fer.brat_S.setPower(.2);
         }
