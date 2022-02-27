@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Autonome.Teste;
+package org.firstinspires.ftc.teamcode.TeleOpuri.Altele;
 
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;

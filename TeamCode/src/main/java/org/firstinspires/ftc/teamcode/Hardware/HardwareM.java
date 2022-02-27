@@ -1,12 +1,17 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OrientationSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 public class HardwareM extends LinearOpMode
 {
@@ -15,8 +20,9 @@ public class HardwareM extends LinearOpMode
                    brat_Scripete  = null;
     public DcMotor caruselDreapta = null, caruselStanga = null;
 
-
     public CRServo leftClaw = null, rightClaw = null;   //schimbati in Servo daca folositi celelalte variante
+
+    public BNO055IMU imu;
 
     public static final int MAX_SCRIPETE            =  -821 ;
     public static final int MIN_SCRIPETE            =  -8 ;
@@ -54,6 +60,18 @@ public class HardwareM extends LinearOpMode
         leftClaw  = hardwaremap.get(CRServo.class, "leftClaw");
         rightClaw = hardwaremap.get(CRServo.class, "rightClaw");
 
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json";
+        parameters.loggingEnabled = true;
+        parameters.loggingTag = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        //setIMUParams(parameters);
+
+        imu = hardwaremap.get(BNO055IMU.class, "IMU");
+        imu.initialize(parameters);
+
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
         setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_Scripete, caruselDreapta);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_D, caruselStanga);                                                             //set Directions Reverse
@@ -62,26 +80,6 @@ public class HardwareM extends LinearOpMode
         leftClaw.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftClaw.setDirection();
         //stopServos();
-    }
-
-    public void stopMotors() {
-        roataStanga.setPower(0);
-        roataDreapta.setPower(0);
-        brat_S.setPower(0);
-        brat_D.setPower(0);
-        brat_Scripete.setPower(0);
-        caruselDreapta.setPower(0);
-        caruselStanga.setPower(0);
-    }
-
-    public void stopMotors(DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setPower(0);
-    }
-
-    public void restartServos() {
-        leftClaw.setPower(1);
-        rightClaw.setPower(.8);
     }
 
     private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
@@ -99,12 +97,46 @@ public class HardwareM extends LinearOpMode
             m.setMode(mode);
     }
 
+    private void setIMUParams(BNO055IMU.Parameters param) {
+        param.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        param.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        param.calibrationDataFile = "BNO055IMUCalibration.json";
+        param.loggingEnabled = true;
+        param.loggingTag = "IMU";
+        param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+    }
+
+    public void stopMotors() {
+        roataStanga.setPower(0);
+        roataDreapta.setPower(0);
+        brat_S.setPower(0);
+        brat_D.setPower(0);
+        brat_Scripete.setPower(0);
+        caruselDreapta.setPower(0);
+        caruselStanga.setPower(0);
+    }
+
+    public void stopMotors(DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setPower(0);
+    }
+
+    public void setWheelPowers(double p1, double p2) {
+        roataStanga.setPower(p1);
+        roataDreapta.setPower(p2);
+    }
+
     public void resetEncoders(DcMotor ... motors) {
         for(DcMotor motor:motors)
         {
             setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, motor);
             setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, motor);
         }
+    }
+
+    public void restartServos() {
+        leftClaw.setPower(1);
+        rightClaw.setPower(.8);
     }
 
     @Override
