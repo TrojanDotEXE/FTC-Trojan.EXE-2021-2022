@@ -20,17 +20,22 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         fer.init(hardwareMap);
         //Prinde pre-loadul
-        fer.leftClaw.setPower(1);
-        fer.rightClaw.setPower(.7);
+        //  fer.leftClaw.setPower(1);
+        // fer.rightClaw.setPower(.7);
         //Asteapta o secunda
-        sleep(1000);
+        //sleep(1000);
 
         waitForStart();
         runtime.reset();
 
+        //Prinde pre-loadul
+        fer.leftClaw.setPower(1);
+        fer.rightClaw.setPower(.7);
+
+        sleep(1000);
 
         //intoarce-te la dreapta
-        turn(.5, -HardwareM.ROTIRE90, fer.roataStanga, fer.roataDreapta);
+        turn(.5, -HardwareM.ROTIRE90-10, fer.roataStanga, fer.roataDreapta);
         while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
 
@@ -44,18 +49,18 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat_D.setPower(0);
 
         //mergi in fata
-        goTo(.33, -2520, fer.roataStanga, fer.roataDreapta);
+        goTo(.33, -2050, fer.roataStanga, fer.roataDreapta);
         while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
 
         //intoarce-te la stanga
-        turn(.33, HardwareM.ROTIRE90-50,fer.roataStanga, fer.roataDreapta);
+        turn(.33, HardwareM.ROTIRE90-390,fer.roataStanga, fer.roataDreapta);
         while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
         fer.stopMotors(fer.roataDreapta, fer.roataStanga);
 
         runtime2.reset();
         //Ridica bratul la stratul 3
-        while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3-300){
+        while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3){
             fer.brat_D.setPower(.2);
             fer.brat_S.setPower(.2);
         }
@@ -63,12 +68,12 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat_D.setPower(0);
 
         //Mergi in fata pana la s.h.
-        goTo(.33, -1630, fer.roataStanga, fer.roataDreapta);
+        goTo(.33, -1690, fer.roataStanga, fer.roataDreapta);
         while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()));
         fer.stopMotors(fer.roataStanga, fer.roataDreapta);
 
           //extinde bratul
-        goTo(.4, -130, fer.brat_Scripete);
+        goTo(.7, -380, fer.brat_Scripete);
         while(opModeIsActive() && fer.brat_Scripete.isBusy()){}
         fer.stopMotors(fer.brat_Scripete);
 
@@ -80,13 +85,14 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.rightClaw.setPower(-1);
 
         //mergi in spate la pozitia initiala
-        goTo(.6, 1300, fer.roataStanga, fer.roataDreapta);
+        goTo(1, 1650, fer.roataStanga, fer.roataDreapta);
         while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()));
         fer.stopMotors(fer.roataStanga, fer.roataDreapta);
 
-        //inchide clestele
-        fer.leftClaw.setPower(1);
-        fer.rightClaw.setPower(.7);
+        //retrage bratul
+        goTo(.7, 340, fer.brat_Scripete);
+        while(opModeIsActive() && fer.brat_Scripete.isBusy()){}
+        fer.stopMotors(fer.brat_Scripete);
 
         //Reseteaza al 2-lea timer
         runtime2.reset();
@@ -99,6 +105,40 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat_S.setPower(0);
         fer.brat_D.setPower(0);
 
+
+        //intoarce-te la dreapta
+        turn(1, -HardwareM.ROTIRE90+30, fer.roataStanga, fer.roataDreapta);
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
+        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+
+        //mergi in spate pana la carusel
+        goTo(1, 6400, fer.roataStanga, fer.roataDreapta);
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
+        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+
+        //intoarce-te la stanga
+        turn(.6, HardwareM.ROTIRE90-90,fer.roataStanga, fer.roataDreapta);
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
+        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+
+        //mergi in spate pana la carusel
+        goTo(1, 1560, fer.roataStanga, fer.roataDreapta);
+        while(opModeIsActive() && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
+        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+
+        runtime2.reset();
+        //da o ratusca jos
+           while(opModeIsActive() && runtime2.seconds()<4){
+               fer.caruselStanga.setPower(.8);
+               fer.caruselDreapta.setPower(-.8);
+       }
+        fer.caruselStanga.setPower(0);
+        fer.caruselDreapta.setPower(0);
+
+        //mergi in fata pana in s.u.
+        goTo(1, -1960, fer.roataStanga, fer.roataDreapta);
+        while(opModeIsActive() && runtime.seconds()<30 && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
+        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
 
 //        //mergi in fata
 //        goTo(.6, -3040, fer.roataStanga, fer.roataDreapta);
