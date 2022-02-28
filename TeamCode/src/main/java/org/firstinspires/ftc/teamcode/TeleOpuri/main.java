@@ -4,14 +4,20 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
 public class main extends OpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
-          HardwareM fer      = new HardwareM();
-          double servoMAX = 1.0, servoMIN = 0.0, pozitie = 0.0;
+    private Orientation angles  = new Orientation();
+            HardwareM   fer     = new HardwareM();
+    private double      currAngle = 0.0;
 
     @Override
     public void init() {
@@ -85,15 +91,52 @@ public class main extends OpMode
             fer.leftClaw.setPower(1);
             fer.rightClaw.setPower(.8);
         }
+        if(gamepad1.y)
+            turn(41);
 
-        if(gamepad1.x)
-            fer.resetEncoders(fer.roataDreapta, fer.roataStanga, fer.brat_S, fer.brat_Scripete);
+        if (gamepad1.b)
+            turn(-41);
 
-        telemetry.addData("Left Position: ", "%7d", fer.roataStanga.getCurrentPosition());
-        telemetry.addData("Right Position: ", "%7d", fer.roataDreapta.getCurrentPosition());
-        telemetry.addData("Arm Position: ", "%7d", fer.brat_S.getCurrentPosition());
-        telemetry.addData("Scripete Position: ", "%7d", fer.brat_Scripete.getCurrentPosition());
+//        if(gamepad1.x)
+//            fer.resetEncoders(fer.roataDreapta, fer.roataStanga, fer.brat_S, fer.brat_Scripete);
+//        telemetry.addData("Left Position: ", "%7d", fer.roataStanga.getCurrentPosition());
+//        telemetry.addData("Right Position: ", "%7d", fer.roataDreapta.getCurrentPosition());
+//        telemetry.addData("Arm Position: ", "%7d", fer.brat_S.getCurrentPosition());
+//        telemetry.addData("Scripete Position: ", "%7d", fer.brat_Scripete.getCurrentPosition());
 
         telemetry.addData("Run Time: ", "%7d", (int)runtime.seconds());
+    }
+
+    public void resetAngle() {
+        angles = fer.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        currAngle = 0;
+    }
+
+    public double getCurrAngle() {
+        Orientation orientation = fer.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        double deltaAngle = -orientation.firstAngle + angles.firstAngle;
+
+        if(deltaAngle > 180)
+            deltaAngle -= 360;
+        else if(deltaAngle <= -180)
+            deltaAngle += 360;
+        currAngle += deltaAngle;
+        angles = orientation;
+        return currAngle;
+    }
+
+    public void turn(double degrees) {
+        resetAngle();
+        double target = degrees;
+        while(Math.abs(target) > 2){
+            getCurrAngle();
+            double p = (target < 0 ? -.3 : .3);
+            fer.setWheelPowers(-p, p);
+            target = target - currAngle;
+            resetAngle();
+            telemetry.addData("Target: ", "%7f / %7f", target, 2.0);
+            telemetry.update();
+
+        }
     }
 }

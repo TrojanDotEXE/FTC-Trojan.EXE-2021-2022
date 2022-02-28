@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 public class MetodeAutonoma extends LinearOpMode {
-    HardwareM fer = new HardwareM();
 
     @Override
     public void runOpMode() throws InterruptedException {}

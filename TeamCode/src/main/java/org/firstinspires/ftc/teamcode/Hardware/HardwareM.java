@@ -61,13 +61,7 @@ public class HardwareM extends LinearOpMode
         rightClaw = hardwaremap.get(CRServo.class, "rightClaw");
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        parameters.calibrationDataFile = "BNO055IMUCalibration.json";
-        parameters.loggingEnabled = true;
-        parameters.loggingTag = "IMU";
-        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-        //setIMUParams(parameters);
+        setIMUParams(parameters);
 
         imu = hardwaremap.get(BNO055IMU.class, "IMU");
         imu.initialize(parameters);
@@ -92,11 +86,6 @@ public class HardwareM extends LinearOpMode
             m.setZeroPowerBehavior(mode);
     }
 
-    private void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setMode(mode);
-    }
-
     private void setIMUParams(BNO055IMU.Parameters param) {
         param.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         param.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -104,6 +93,11 @@ public class HardwareM extends LinearOpMode
         param.loggingEnabled = true;
         param.loggingTag = "IMU";
         param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+    }
+
+    public void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setMode(mode);
     }
 
     public void stopMotors() {
