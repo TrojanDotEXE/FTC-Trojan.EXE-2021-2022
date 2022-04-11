@@ -64,11 +64,10 @@ public class main extends OpMode
 
         //Carusel
         while(gamepad1.right_bumper)
-            fer.caruselDreapta.setPower(-.85);
+            fer.caruselStanga.setPower(-.85);
         while (gamepad1.left_bumper)
             fer.caruselStanga.setPower(.85);
 
-        fer.caruselDreapta.setPower(0);
         fer.caruselStanga.setPower(0);
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ public class HardwareM extends LinearOpMode
     public DcMotor roataStanga    = null, roataDreapta  = null; //Motoare fata
     public DcMotor brat_S         = null, brat_D        = null, //Motoare brat
                    brat_Scripete  = null;
-    public DcMotor caruselDreapta = null, caruselStanga = null;
+    public DcMotor caruselStanga  = null;
 
     public CRServo leftClaw = null, rightClaw = null;   //schimbati in Servo daca folositi celelalte variante
 
@@ -31,7 +31,7 @@ public class HardwareM extends LinearOpMode
 
     public static final int T1 = 400;
     public static final int T2 = 600;
-    public static final int T3 = 900;
+    public static final int T3 = 1000;
 
     public static final int HDHEX40_TICK_COUNTS     = 1120;         //TODO: fa un Enum pt tick counts, roti, etc.
     public static final int TETRIX_TICK_COUNTS      = 1440;
@@ -54,7 +54,6 @@ public class HardwareM extends LinearOpMode
         brat_S         = hardwaremap.get(DcMotor.class, "motorS");
         brat_D         = hardwaremap.get(DcMotor.class, "motorD");
         brat_Scripete  = hardwaremap.get(DcMotor.class, "motorScripete");
-        caruselDreapta = hardwaremap.get(DcMotor.class, "motorCaruselD");
         caruselStanga  = hardwaremap.get(DcMotor.class, "motorCaruselS");
 
         leftClaw  = hardwaremap.get(CRServo.class, "leftClaw");
@@ -66,8 +65,8 @@ public class HardwareM extends LinearOpMode
         imu = hardwaremap.get(BNO055IMU.class, "IMU");
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselDreapta, caruselStanga);               //set 0 Behaivior
-        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_Scripete, caruselDreapta);                            //set Directions Forward
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselStanga);               //set 0 Behaivior
+        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_Scripete);                            //set Directions Forward
         setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_D, caruselStanga);                                                             //set Directions Reverse
         resetEncoders(roataDreapta, roataStanga, brat_S, brat_Scripete);
         stopMotors();   //setPower 0
@@ -106,7 +105,6 @@ public class HardwareM extends LinearOpMode
         brat_S.setPower(0);
         brat_D.setPower(0);
         brat_Scripete.setPower(0);
-        caruselDreapta.setPower(0);
         caruselStanga.setPower(0);
     }
 
