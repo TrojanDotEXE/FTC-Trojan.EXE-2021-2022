@@ -25,7 +25,9 @@ public class main extends OpMode
         telemetry.addData("Status: " ,"Initialized");
     }
     @Override
-    public void start(){runtime.reset();}
+    public void start() {
+        runtime.reset();
+    }
 
     /**
      * <h1>Gamepad 1</h1>
@@ -64,31 +66,31 @@ public class main extends OpMode
 
         //Carusel
         while(gamepad1.right_bumper)
-            fer.caruselStanga.setPower(-.85);
+            fer.carusel.setPower(-.85);
         while (gamepad1.left_bumper)
-            fer.caruselStanga.setPower(.85);
+            fer.carusel.setPower(.85);
 
-        fer.caruselStanga.setPower(0);
+        fer.carusel.setPower(0);
 
 //Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
         //Brat
         while(gamepad2.b){
-            fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
-            fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+            fer.bratDreapta.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+            fer.bratStanga.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
 
         }
-        fer.brat_D.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-        fer.brat_S.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-        fer.brat_Scripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        fer.bratDreapta.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+        fer.bratStanga.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
+        fer.bratScripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
 
         //Cleste
         if(gamepad2.right_bumper) {
-            fer.leftClaw.setPower(-1);
-            fer.rightClaw.setPower(-1 );
+            fer.clesteStanga.setPower(-1);
+            fer.clesteDreapta.setPower(-1 );
         }
         else {
-            fer.leftClaw.setPower(1);
-            fer.rightClaw.setPower(.8);
+            fer.clesteStanga.setPower(1);
+            fer.clesteDreapta.setPower(.8);
         }
         if(gamepad1.y)
             turn(41);

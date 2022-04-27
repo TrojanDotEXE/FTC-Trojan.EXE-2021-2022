@@ -31,8 +31,8 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime.reset();
 
         //Prinde pre-loadul
-        fer.leftClaw.setPower(1);
-        fer.rightClaw.setPower(.7);
+        fer.clesteStanga.setPower(1);
+        fer.clesteDreapta.setPower(.7);
 
         //stai o secunda
         sleep(1000);
@@ -43,11 +43,11 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+50){
-            fer.brat_D.setPower(.27);
-            fer.brat_S.setPower(.27);
+            fer.bratDreapta.setPower(.27);
+            fer.bratStanga.setPower(.27);
         }
-        fer.brat_S.setPower(0);
-        fer.brat_D.setPower(0);
+        fer.bratStanga.setPower(0);
+        fer.bratDreapta.setPower(0);
 
         //mergi in fata
         goTo(.35, -1925, fer.roataStanga, fer.roataDreapta);
@@ -61,11 +61,11 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+100f){
-            fer.brat_D.setPower(.34);
-            fer.brat_S.setPower(.34);
+            fer.bratDreapta.setPower(.34);
+            fer.bratStanga.setPower(.34);
         }
-        fer.brat_S.setPower(0);
-        fer.brat_D.setPower(0);
+        fer.bratStanga.setPower(0);
+        fer.bratDreapta.setPower(0);
 
         //Mergi in fata pana la s.h.
         goTo(.35, -1540, fer.roataStanga, fer.roataDreapta);
@@ -74,25 +74,25 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
 
           //extinde bratul
-        goTo(.7, -320, fer.brat_Scripete);
-        while(opModeIsActive() && runtime.seconds() < 30 && fer.brat_Scripete.isBusy()){}
-        fer.stopMotors(fer.brat_Scripete);
+        goTo(.7, -320, fer.bratScripete);
+        while(opModeIsActive() && runtime.seconds() < 30 && fer.bratScripete.isBusy()){}
+        fer.stopMotors(fer.bratScripete);
 
         //Reseteaza al 2-lea timer
         runtime2.reset();
 
         //lasa obiectul in s.h.
-        fer.leftClaw.setPower(-.7);
-        fer.rightClaw.setPower(-.7);
+        fer.clesteStanga.setPower(-.7);
+        fer.clesteDreapta.setPower(-.7);
 
         runtime2.reset();
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<150){
-            fer.brat_D.setPower(.28);
-            fer.brat_S.setPower(.28);
+            fer.bratDreapta.setPower(.28);
+            fer.bratStanga.setPower(.28);
         }
-        fer.brat_S.setPower(0);
-        fer.brat_D.setPower(0);
+        fer.bratStanga.setPower(0);
+        fer.bratDreapta.setPower(0);
 
         //mergi in spate la pozitia initiala
         goTo(1, 1480, fer.roataStanga, fer.roataDreapta);
@@ -101,20 +101,20 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
 
         //retrage bratul
-        goTo(.7, 320, fer.brat_Scripete);
-        while(opModeIsActive() && runtime.seconds() < 30 && fer.brat_Scripete.isBusy()){}
-        fer.stopMotors(fer.brat_Scripete);
+        goTo(.7, 320, fer.bratScripete);
+        while(opModeIsActive() && runtime.seconds() < 30 && fer.bratScripete.isBusy()){}
+        fer.stopMotors(fer.bratScripete);
 
         //Reseteaza al 2-lea timer
         runtime2.reset();
 
         //Coboara bratul
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3-100){
-            fer.brat_D.setPower(-.2);
-            fer.brat_S.setPower(-.2);
+            fer.bratDreapta.setPower(-.2);
+            fer.bratStanga.setPower(-.2);
         }
-        fer.brat_S.setPower(0);
-        fer.brat_D.setPower(0);
+        fer.bratStanga.setPower(0);
+        fer.bratDreapta.setPower(0);
 
         //intoarce-te la dreapta
         turn(degrees90+12);
@@ -138,10 +138,10 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
         //da o ratusca jos
            while(opModeIsActive() && runtime2.seconds()<3.5){
-               fer.caruselStanga.setPower(.8);
+               fer.carusel.setPower(.8);
 
        }
-        fer.caruselStanga.setPower(0);
+        fer.carusel.setPower(0);
 
         //mergi in fata pana in s.u.
         goTo(1, -2025, fer.roataStanga, fer.roataDreapta);

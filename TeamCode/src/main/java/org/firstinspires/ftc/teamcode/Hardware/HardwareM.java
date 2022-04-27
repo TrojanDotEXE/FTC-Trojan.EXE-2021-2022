@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Hardware;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -7,20 +9,15 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.OrientationSensor;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+public class HardwareM extends LinearOpMode {
 
-public class HardwareM extends LinearOpMode
-{
-    public DcMotor roataStanga    = null, roataDreapta  = null; //Motoare fata
-    public DcMotor brat_S         = null, brat_D        = null, //Motoare brat
-                   brat_Scripete  = null;
-    public DcMotor caruselStanga  = null;
+    public DcMotor roataStanga  = null , roataDreapta = null; //Motoare fata
+    public DcMotor bratStanga   = null , bratDreapta  = null, //Motoare brat
+                   bratScripete = null;
+    public DcMotor carusel      = null;
 
-    public CRServo leftClaw = null, rightClaw = null;   //schimbati in Servo daca folositi celelalte variante
+    public CRServo clesteStanga = null , clesteDreapta = null; //schimbati in Servo daca folositi celelalte variante
 
     public BNO055IMU imu;
 
@@ -48,16 +45,17 @@ public class HardwareM extends LinearOpMode
 
     //TODO: fa autonoma sa se opreasca dupa perioada de timp permisa
 
-    public void init (HardwareMap hardwaremap){
-        roataStanga    = hardwaremap.get(DcMotor.class, "motorStanga");   //Motoare
-        roataDreapta   = hardwaremap.get(DcMotor.class, "motorDreapta");
-        brat_S         = hardwaremap.get(DcMotor.class, "motorS");
-        brat_D         = hardwaremap.get(DcMotor.class, "motorD");
-        brat_Scripete  = hardwaremap.get(DcMotor.class, "motorScripete");
-        caruselStanga  = hardwaremap.get(DcMotor.class, "motorCaruselS");
+    public void init (HardwareMap hardwaremap) {
 
-        leftClaw  = hardwaremap.get(CRServo.class, "leftClaw");
-        rightClaw = hardwaremap.get(CRServo.class, "rightClaw");
+        roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");   //Motoare
+        roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
+        bratStanga   = hardwaremap.get(DcMotor.class, "motorS");
+        bratDreapta  = hardwaremap.get(DcMotor.class, "motorD");
+        bratScripete = hardwaremap.get(DcMotor.class, "motorScripete");
+        carusel      = hardwaremap.get(DcMotor.class, "motorCaruselS");
+
+        clesteStanga  = hardwaremap.get(CRServo.class, "leftClaw");
+        clesteDreapta = hardwaremap.get(CRServo.class, "rightClaw");
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         setIMUParams(parameters);
@@ -65,27 +63,27 @@ public class HardwareM extends LinearOpMode
         imu = hardwaremap.get(BNO055IMU.class, "IMU");
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat_S, brat_D, brat_Scripete, caruselStanga);               //set 0 Behaivior
-        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat_S, brat_Scripete);                            //set Directions Forward
-        setDirections(DcMotor.Direction.REVERSE, roataStanga, brat_D, caruselStanga);                                                             //set Directions Reverse
-        resetEncoders(roataDreapta, roataStanga, brat_S, brat_Scripete);
-        stopMotors();   //setPower 0
-        leftClaw.setDirection(DcMotorSimple.Direction.REVERSE);
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, bratStanga, bratDreapta, bratScripete, carusel);
+        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, bratStanga, bratScripete);
+        setDirections(DcMotor.Direction.REVERSE, roataStanga, bratDreapta, carusel);
+        resetEncoders(roataDreapta, roataStanga, bratStanga, bratScripete);
+        stopMotors();
+        clesteStanga.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftClaw.setDirection();
         //stopServos();
     }
 
-    private void setDirections(DcMotor.Direction d,DcMotor ... motors) {
+    private void setDirections(DcMotor.Direction d, @NonNull DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setDirection(d);
     }
 
-    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, DcMotor ... motors) {
+    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, @NonNull DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setZeroPowerBehavior(mode);
     }
 
-    private void setIMUParams(BNO055IMU.Parameters param) {
+    private void setIMUParams(@NonNull BNO055IMU.Parameters param) {
         param.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         param.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
         param.calibrationDataFile = "BNO055IMUCalibration.json";
@@ -94,7 +92,7 @@ public class HardwareM extends LinearOpMode
         param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
     }
 
-    public void setEncoderMode(DcMotor.RunMode mode, DcMotor ... motors) {
+    public void setEncoderMode(DcMotor.RunMode mode, @NonNull DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setMode(mode);
     }
@@ -102,13 +100,13 @@ public class HardwareM extends LinearOpMode
     public void stopMotors() {
         roataStanga.setPower(0);
         roataDreapta.setPower(0);
-        brat_S.setPower(0);
-        brat_D.setPower(0);
-        brat_Scripete.setPower(0);
-        caruselStanga.setPower(0);
+        bratStanga.setPower(0);
+        bratDreapta.setPower(0);
+        bratScripete.setPower(0);
+        carusel.setPower(0);
     }
 
-    public void stopMotors(DcMotor ... motors) {
+    public void stopMotors(@NonNull DcMotor ... motors) {
         for (DcMotor m:motors)
             m.setPower(0);
     }
@@ -118,7 +116,7 @@ public class HardwareM extends LinearOpMode
         roataDreapta.setPower(p2);
     }
 
-    public void resetEncoders(DcMotor ... motors) {
+    public void resetEncoders(@NonNull DcMotor ... motors) {
         for(DcMotor motor:motors)
         {
             setEncoderMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER, motor);
@@ -127,11 +125,12 @@ public class HardwareM extends LinearOpMode
     }
 
     public void restartServos() {
-        leftClaw.setPower(1);
-        rightClaw.setPower(.8);
+        clesteStanga.setPower(1);
+        clesteDreapta.setPower(.8);
     }
 
     @Override
     public void runOpMode(){}
     public HardwareM(){}    //Constructor
 }
+
