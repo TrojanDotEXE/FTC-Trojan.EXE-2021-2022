@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOpuri;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
+@Disabled
 public class main extends OpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
@@ -28,20 +30,6 @@ public class main extends OpMode
     public void start() {
         runtime.reset();
     }
-
-    /**
-     * <h1>Gamepad 1</h1>
-     * <ul><li> <b>fata spate</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - left_stick_y </li>
-     *     <li> <b>stanga dreapta</b> - right_stick_x</li>
-     *     <li> <b>carusel dreapta</b> - right_bumper </li>
-     *     <li> <b>carusel stanga</b>&nbsp; - left_bumper </li>
-     *     <li> <b>reset encoder *</b> - x </li></ul>
-     * <h1>Gamepad 2</h1>
-     * <ul><li> <b>brat sus-jos</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - left_stick_y (<b>1 = jos</b>, <b>-1 = sus</b>)</li>
-     *     <li> <b>scripete fata-spate</b> - right_stick_y (<b>1 = fata</b>, <b>-1 = spate</b>)</li>
-     *     <li> <b>cleste deschidere</b>&nbsp;&nbsp; - left_bumper</li>
-     *     <li> <b>slowmode brat</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - b</li></ul></ul>
-     */
 
     @Override
     public void loop() {
@@ -72,7 +60,8 @@ public class main extends OpMode
 
         fer.carusel.setPower(0);
 
-//Gamepad 2------------------------------------------------------------------------------------------------------------------------------------------------------------
+///Gamepad 2
+
         //Brat
         while(gamepad2.b){
             fer.bratDreapta.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
@@ -97,13 +86,6 @@ public class main extends OpMode
 
         if (gamepad1.b)
             turn(-41);
-
-//        if(gamepad1.x)
-//            fer.resetEncoders(fer.roataDreapta, fer.roataStanga, fer.brat_S, fer.brat_Scripete);
-//        telemetry.addData("Left Position: ", "%7d", fer.roataStanga.getCurrentPosition());
-//        telemetry.addData("Right Position: ", "%7d", fer.roataDreapta.getCurrentPosition());
-//        telemetry.addData("Arm Position: ", "%7d", fer.brat_S.getCurrentPosition());
-//        telemetry.addData("Scripete Position: ", "%7d", fer.brat_Scripete.getCurrentPosition());
 
         telemetry.addData("Run Time: ", "%7d", (int)runtime.seconds());
     }

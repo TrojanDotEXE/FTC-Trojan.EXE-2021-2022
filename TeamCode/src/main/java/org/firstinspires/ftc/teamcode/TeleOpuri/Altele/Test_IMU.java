@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOpuri.Altele;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "Test IMU", group = "Teste")
+@Disabled
 public class Test_IMU extends OpMode {
     private double      currAngle = 0.0;
     private Orientation angles    = new Orientation();
