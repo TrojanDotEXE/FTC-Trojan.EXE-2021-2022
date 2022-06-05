@@ -109,7 +109,7 @@ public class main extends OpMode
     }
 
     public void turn(double degrees) {
-        resetAngle();
+        resetAngle();                      // asta ii robotu meu, sugeti
         double target = degrees;
         while(Math.abs(target) > 2){
             getCurrAngle();
