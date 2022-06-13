@@ -48,10 +48,10 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat.setPower(0);
 
         //mergi in fata
-        goTo(.35, -1925, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
-        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
+        goTo(.35, -1925, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
         //intoarce-te la stanga
         turn(-degrees90+9);
@@ -64,14 +64,10 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat.setPower(0);
 
         //Mergi in fata pana la s.h.
-        goTo(.35, -1540, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()));
-        fer.stopMotors(fer.roataStanga, fer.roataDreapta);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
-
-          //extinde bratul
-        while(opModeIsActive() && runtime.seconds() < 30){}
-
+        goTo(.35, -1540, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy()));
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
         //Reseteaza al 2-lea timer
         runtime2.reset();
@@ -81,6 +77,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.clesteDreapta.setPower(-.7);
 
         runtime2.reset();
+
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<150){
             fer.brat.setPower(.28);
@@ -88,14 +85,10 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat.setPower(0);
 
         //mergi in spate la pozitia initiala
-        goTo(1, 1480, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.roataStanga.isBusy() || fer.roataDreapta.isBusy()));
-        fer.stopMotors(fer.roataStanga, fer.roataDreapta);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
-
-        //retrage bratul
-        while(opModeIsActive() && runtime.seconds() < 30){}
-
+        goTo(1, 1480, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy()));
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
         //Reseteaza al 2-lea timer
         runtime2.reset();
@@ -110,19 +103,19 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         turn(degrees90+12);
 
         //mergi in spate pana la carusel
-        goTo(1, 6380, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
-        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
+        goTo(1, 6380, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        fer.stopMotors(fer.wheelRightBack, fer.wheelLeftBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
         //intoarce-te la stanga
         turn(-degrees90-9.5);
 
         //mergi in spate pana la carusel
-        goTo(1, 1900, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
-        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.roataStanga, fer.roataDreapta);
+        goTo(1, 1900, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
 
         runtime2.reset();
@@ -134,9 +127,9 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.carusel.setPower(0);
 
         //mergi in fata pana in s.u.
-        goTo(1, -2025, fer.roataStanga, fer.roataDreapta);
-        while(opModeIsActive() && runtime.seconds() < 30 && runtime.seconds()<30 && (fer.roataStanga.isBusy() || fer.roataStanga.isBusy())){}
-        fer.stopMotors(fer.roataDreapta, fer.roataStanga);
+        goTo(1, -2025, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && runtime.seconds()<30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
     }
     public void resetAngle() {
@@ -163,8 +156,10 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         while(Math.abs(target) > 2){
             getCurrAngle();
             double p = (target < 0 ? -.3 : .3);
-            fer.roataStanga.setPower(-p);
-            fer.roataDreapta.setPower(p);
+            fer.wheelLeftBack.setPower(-p);
+            fer.wheelLeftFront.setPower(-p);
+            fer.wheelRightBack.setPower(p);
+            fer.wheelRightFront.setPower(p);
             target = target - currAngle;
             resetAngle();
             telemetry.addData("Target: ", "%7f / %7f", target, 2.0);

@@ -41,16 +41,22 @@ public class main extends OpMode
         left  = Range.clip(fata_spate - stanga_dreapta,-1,1);
         right = Range.clip(fata_spate + stanga_dreapta,-1 ,1);
 
-        fer.roataStanga.setPower(left);
-        fer.roataDreapta.setPower(right);
+        fer.wheelLeftBack.setPower(left);
+        fer.wheelLeftFront.setPower(left);
+        fer.wheelRightBack.setPower(right);
+        fer.wheelRightFront.setPower(right);
 
         while(gamepad1.dpad_left) {
-            fer.roataStanga.setPower(-.7);
-            fer.roataDreapta.setPower(.7);
+            fer.wheelLeftBack.setPower(-.7);
+            fer.wheelLeftFront.setPower(-.7);
+            fer.wheelRightBack.setPower(.7);
+            fer.wheelRightFront.setPower(.7);
             }
         while(gamepad1.dpad_right) {
-            fer.roataStanga.setPower(.7);
-            fer.roataDreapta.setPower(-.7);
+            fer.wheelLeftBack.setPower(.7);
+            fer.wheelLeftFront.setPower(.7);
+            fer.wheelRightBack.setPower(-.7);
+            fer.wheelRightBack.setPower(-.7);
         }
 
         //Carusel
@@ -58,7 +64,6 @@ public class main extends OpMode
             fer.carusel.setPower(-.85);
         while (gamepad1.left_bumper)
             fer.carusel.setPower(.85);
-
         fer.carusel.setPower(0);
 
 ///Gamepad 2
@@ -103,7 +108,7 @@ public class main extends OpMode
     }
 
     public void turn(double degrees) {
-        resetAngle();                      // asta ii robotu meu, sugeti
+        resetAngle();
         double target = degrees;
         while(Math.abs(target) > 2){
             getCurrAngle();

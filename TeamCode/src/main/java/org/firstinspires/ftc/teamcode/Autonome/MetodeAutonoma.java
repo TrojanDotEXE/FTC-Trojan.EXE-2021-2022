@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.Autonome;
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
@@ -11,7 +14,7 @@ public class MetodeAutonoma extends LinearOpMode {
     public void runOpMode() throws InterruptedException {}
 
     //ambele motoare aceeasi distanta
-    public void goTo(double power, int rotatii, DcMotor... motors){
+    public void goTo(double power, int rotatii, @NonNull DcMotor... motors){
         for(DcMotor motor:motors)
         {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -29,7 +32,7 @@ public class MetodeAutonoma extends LinearOpMode {
 
     //rotatii+ => rotire dreapta
     //rotatii- => rotire stanga
-    public void turn (double power, int rotatii, DcMotor roataStanga, DcMotor roataDreapta) {
+    public void turn (double power, int rotatii, @NonNull DcMotor roataStanga, @NonNull DcMotor roataDreapta) {
         roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         roataStanga.setTargetPosition(rotatii);
         roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -41,7 +44,7 @@ public class MetodeAutonoma extends LinearOpMode {
     }
 
     //nr rotatii encoder
-    public void displayEncoder(DcMotor motor){
+    public void displayEncoder(@NonNull DcMotor motor){
         while(motor.isBusy())
         {
             telemetry.addData("Left Position / Target :", "%7d / %7d",
@@ -51,7 +54,7 @@ public class MetodeAutonoma extends LinearOpMode {
     }
 
     //nr rotatii 2 encodere
-    public void displayEncoders(DcMotor motorStanga, DcMotor motorDreapta) {
+    public void displayEncoders(@NonNull DcMotor motorStanga, DcMotor motorDreapta) {
         while (motorStanga.isBusy() || motorDreapta.isBusy()) {
             telemetry.addData("Left Position / Target :", "%7d / %7d",
                     motorStanga.getCurrentPosition(), motorStanga.getTargetPosition());
@@ -59,5 +62,16 @@ public class MetodeAutonoma extends LinearOpMode {
                     motorDreapta.getCurrentPosition(), motorDreapta.getTargetPosition());
             telemetry.update();
         }
+    }
+
+    public boolean isRunning(ElapsedTime runtime, @NonNull DcMotor... motors){
+        boolean isMotorBusy = false;
+        for (DcMotor motor: motors) {
+            if (motor.isBusy()) {
+                isMotorBusy = true;
+                break;
+            }
+        }
+        return opModeIsActive() && runtime.seconds() < 30 && isMotorBusy;
     }
 }

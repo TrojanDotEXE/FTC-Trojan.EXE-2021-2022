@@ -17,9 +17,10 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 public class HardwareM extends LinearOpMode {
 
-    public DcMotor roataStanga  = null , roataDreapta = null; //Motoare fata
-    public DcMotor brat = null ;
-    public DcMotor carusel      = null;
+    public DcMotor wheelLeftFront = null  , wheelRightFront = null;
+    public DcMotor wheelLeftBack  = null  , wheelRightBack  = null;
+    public DcMotor brat           = null;
+    public DcMotor carusel        = null;
 
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {
@@ -63,12 +64,14 @@ public class HardwareM extends LinearOpMode {
 
     public void init (HardwareMap hardwaremap) {
 
-        roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");   //Motoare
-        roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
-        brat = hardwaremap.get(DcMotor.class, "motorBratStanga");
-        carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
-        clesteStanga  = hardwaremap.get(CRServo.class, "leftClaw");
-        clesteDreapta = hardwaremap.get(CRServo.class, "rightClaw");
+        wheelLeftFront  = hardwaremap.get(DcMotor.class, "motorStangaFata");
+        wheelRightFront = hardwaremap.get(DcMotor.class, "motorDreaptaFata");
+        wheelLeftBack   = hardwaremap.get(DcMotor.class, "motorStanga");
+        wheelRightBack  = hardwaremap.get(DcMotor.class, "motorDreapta");
+        brat            = hardwaremap.get(DcMotor.class, "motorBratStanga");
+        carusel         = hardwaremap.get(DcMotor.class, "motorCarusel");
+        clesteStanga    = hardwaremap.get(CRServo.class, "leftClaw");
+        clesteDreapta   = hardwaremap.get(CRServo.class, "rightClaw");
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         setIMUParams(parameters);
@@ -76,14 +79,12 @@ public class HardwareM extends LinearOpMode {
         imu = hardwaremap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat, carusel);
-        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat);
-        setDirections(DcMotor.Direction.REVERSE, roataStanga, carusel);
-        resetEncoders(roataDreapta, roataStanga, brat);
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, wheelLeftBack, wheelLeftFront, wheelRightBack, wheelRightFront, brat, carusel);
+        setDirections(DcMotor.Direction.FORWARD, wheelRightBack, wheelRightFront, brat);
+        setDirections(DcMotor.Direction.REVERSE, wheelLeftBack, wheelLeftFront, carusel);
+        resetEncoders(wheelRightBack, wheelLeftBack, wheelRightFront, wheelLeftFront, brat);
         stopMotors();
         clesteStanga.setDirection(DcMotorSimple.Direction.REVERSE);
-        //leftClaw.setDirection();
-        //stopServos();
         initVuforia();
         initTfod();
     }
@@ -113,8 +114,8 @@ public class HardwareM extends LinearOpMode {
     }
 
     public void stopMotors() {
-        roataStanga.setPower(0);
-        roataDreapta.setPower(0);
+        wheelLeftBack.setPower(0);
+        wheelRightBack.setPower(0);
         brat.setPower(0);
         carusel.setPower(0);
     }
@@ -125,8 +126,8 @@ public class HardwareM extends LinearOpMode {
     }
 
     public void setWheelPowers(double p1, double p2) {
-        roataStanga.setPower(p1);
-        roataDreapta.setPower(p2);
+        wheelLeftBack.setPower(p1);
+        wheelRightBack.setPower(p2);
     }
 
     public void resetEncoders(@NonNull DcMotor ... motors) {
