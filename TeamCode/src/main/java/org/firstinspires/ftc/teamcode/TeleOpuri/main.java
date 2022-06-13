@@ -26,6 +26,7 @@ public class main extends OpMode
         fer.init(hardwareMap);
         telemetry.addData("Status: " ,"Initialized");
     }
+
     @Override
     public void start() {
         runtime.reset();
@@ -63,14 +64,7 @@ public class main extends OpMode
 ///Gamepad 2
 
         //Brat
-        while(gamepad2.b){
-            fer.bratDreapta.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
-            fer.bratStanga.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
-
-        }
-        fer.bratDreapta.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-        fer.bratStanga.setPower(Range.clip(gamepad2.left_stick_y, -.5, .5));
-        fer.bratScripete.setPower(Range.clip(gamepad2.right_stick_y, -1, 1));
+        fer.brat.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
 
         //Cleste
         if(gamepad2.right_bumper) {

@@ -10,12 +10,28 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
 public class HardwareM extends LinearOpMode {
 
     public DcMotor roataStanga  = null , roataDreapta = null; //Motoare fata
-    public DcMotor bratStanga   = null , bratDreapta  = null, //Motoare brat
-                   bratScripete = null;
+    public DcMotor brat = null ;
     public DcMotor carusel      = null;
+
+    private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
+    private static final String[] LABELS = {
+            "Ball",
+            "Cube",
+            "Duck",
+            "Marker"
+    };
+    private VuforiaLocalizer vuforia;
+    private TFObjectDetector tfod;
+    private static final String VUFORIA_KEY = "AbcufIb/////AAABmZs6KcRHr0m2uxP9FdDNZHiJeC/zzCekip17+7u/oYc5AH4DhJyHL++2SqmTLlvYT+UismLHFociytOA1QJoXS00gFgdc0899BBB9MWVz6Jve58FlGOVtMU9PqrGP5XJDi9qz2b5HrBu3wSzRiYm/Mwkp2NEq8G1xszfl1be1WtsTGH6RC/tkTq/mxVTiHyzIu3ogXhRzRhnes9DKJlVb6kD4Tn0xxvQTF/14ipbBa0Z4BKrjEYld4U/wVT5dW95RJtMz+dExw68UNdPRLNgk5UtLSDvtgh0i2F4hyO5eyaiTZ+9ZeUUgChId0ow2Sfqox23GPIECsMf5d9oyD3fdCaDrXV/LqBFoI50j8H5svRP";
+
 
     public CRServo clesteStanga = null , clesteDreapta = null; //schimbati in Servo daca folositi celelalte variante
 
@@ -49,28 +65,27 @@ public class HardwareM extends LinearOpMode {
 
         roataStanga  = hardwaremap.get(DcMotor.class, "motorStanga");   //Motoare
         roataDreapta = hardwaremap.get(DcMotor.class, "motorDreapta");
-        bratStanga   = hardwaremap.get(DcMotor.class, "motorS");
-        bratDreapta  = hardwaremap.get(DcMotor.class, "motorD");
-        bratScripete = hardwaremap.get(DcMotor.class, "motorScripete");
-        carusel      = hardwaremap.get(DcMotor.class, "motorCaruselS");
-
+        brat = hardwaremap.get(DcMotor.class, "motorBratStanga");
+        carusel      = hardwaremap.get(DcMotor.class, "motorCarusel");
         clesteStanga  = hardwaremap.get(CRServo.class, "leftClaw");
         clesteDreapta = hardwaremap.get(CRServo.class, "rightClaw");
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         setIMUParams(parameters);
 
-        imu = hardwaremap.get(BNO055IMU.class, "IMU");
+        imu = hardwaremap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, bratStanga, bratDreapta, bratScripete, carusel);
-        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, bratStanga, bratScripete);
-        setDirections(DcMotor.Direction.REVERSE, roataStanga, bratDreapta, carusel);
-        resetEncoders(roataDreapta, roataStanga, bratStanga, bratScripete);
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, roataStanga, roataDreapta, brat, carusel);
+        setDirections(DcMotor.Direction.FORWARD,  roataDreapta, brat);
+        setDirections(DcMotor.Direction.REVERSE, roataStanga, carusel);
+        resetEncoders(roataDreapta, roataStanga, brat);
         stopMotors();
         clesteStanga.setDirection(DcMotorSimple.Direction.REVERSE);
         //leftClaw.setDirection();
         //stopServos();
+        initVuforia();
+        initTfod();
     }
 
     private void setDirections(DcMotor.Direction d, @NonNull DcMotor ... motors) {
@@ -100,9 +115,7 @@ public class HardwareM extends LinearOpMode {
     public void stopMotors() {
         roataStanga.setPower(0);
         roataDreapta.setPower(0);
-        bratStanga.setPower(0);
-        bratDreapta.setPower(0);
-        bratScripete.setPower(0);
+        brat.setPower(0);
         carusel.setPower(0);
     }
 
@@ -132,5 +145,29 @@ public class HardwareM extends LinearOpMode {
     @Override
     public void runOpMode(){}
     public HardwareM(){}    //Constructor
+
+    private void initVuforia() {
+
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.cameraName = hardwareMap.get(WebcamName.class, "Webcam");
+
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+    }
+
+    private void initTfod() {
+
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfodParameters.minResultConfidence = 0.8f;
+        tfodParameters.isModelTensorFlow2 = true;
+        tfodParameters.inputSize = 320;
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+    }
+
 }
 
