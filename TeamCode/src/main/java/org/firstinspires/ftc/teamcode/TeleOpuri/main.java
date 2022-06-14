@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 
 @TeleOp(name = "TeleOP", group = "Teste")
-@Disabled
+//@Disabled
 public class main extends OpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
@@ -23,7 +23,7 @@ public class main extends OpMode
 
     @Override
     public void init() {
-        fer.init(hardwareMap);
+        fer.initialize();
         telemetry.addData("Status: " ,"Initialized");
     }
 

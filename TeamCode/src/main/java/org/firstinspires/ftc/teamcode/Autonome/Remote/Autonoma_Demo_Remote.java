@@ -25,7 +25,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
     @Override
     public void runOpMode() throws InterruptedException {
 
-        fer.init(hardwareMap);
+        fer.initialize();
 
         waitForStart();
         runtime.reset();
