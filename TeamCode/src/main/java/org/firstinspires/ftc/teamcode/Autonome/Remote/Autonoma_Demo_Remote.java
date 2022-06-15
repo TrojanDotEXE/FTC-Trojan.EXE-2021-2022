@@ -25,7 +25,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
     @Override
     public void runOpMode() throws InterruptedException {
 
-        fer.initialize();
+        fer.initialize(hardwareMap);
 
         waitForStart();
         runtime.reset();
@@ -43,9 +43,9 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+50){
-            fer.brat.setPower(.27);
+            fer.brat1.setPower(.27);
         }
-        fer.brat.setPower(0);
+        fer.brat1.setPower(0);
 
         //mergi in fata
         goTo(.35, -1925, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
@@ -59,9 +59,9 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+100f){
-            fer.brat.setPower(.34);
+            fer.brat1.setPower(.34);
         }
-        fer.brat.setPower(0);
+        fer.brat1.setPower(0);
 
         //Mergi in fata pana la s.h.
         goTo(.35, -1540, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
@@ -80,9 +80,9 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         //Ridica bratul la stratul 3
         while(opModeIsActive() && runtime2.milliseconds()<150){
-            fer.brat.setPower(.28);
+            fer.brat1.setPower(.28);
         }
-        fer.brat.setPower(0);
+        fer.brat1.setPower(0);
 
         //mergi in spate la pozitia initiala
         goTo(1, 1480, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
@@ -95,9 +95,9 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         //Coboara bratul
         while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3-100){
-            fer.brat.setPower(-.2);
+            fer.brat1.setPower(-.2);
         }
-        fer.brat.setPower(0);
+        fer.brat1.setPower(0);
 
         //intoarce-te la dreapta
         turn(degrees90+12);

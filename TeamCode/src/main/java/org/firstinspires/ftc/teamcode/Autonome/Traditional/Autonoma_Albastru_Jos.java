@@ -13,7 +13,7 @@ public class Autonoma_Albastru_Jos extends MetodeAutonoma
 
     @Override
     public void runOpMode() throws InterruptedException {
-        fer.initialize();
+        fer.initialize(hardwareMap);
         telemetry.addData("Robot", "Iitializat");
         telemetry.update();
         double p = 0;

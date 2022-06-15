@@ -14,7 +14,7 @@ public class Autonoma_Rosu_Jos extends MetodeAutonoma
 
     @Override
     public void runOpMode() throws InterruptedException {
-        fer.initialize();
+        fer.initialize(hardwareMap);
         telemetry.addData("Robot", "Iitializat");
         telemetry.update();
         int p=0, r=0;

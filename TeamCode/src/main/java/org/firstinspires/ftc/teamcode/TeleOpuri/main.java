@@ -1,11 +1,9 @@
 package org.firstinspires.ftc.teamcode.TeleOpuri;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -18,12 +16,12 @@ public class main extends OpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
     private Orientation angles  = new Orientation();
-            HardwareM   fer     = new HardwareM();
+    private HardwareM   fer     = new HardwareM();
     private double      currAngle = 0.0;
 
     @Override
     public void init() {
-        fer.initialize();
+        fer.initialize(hardwareMap);
         telemetry.addData("Status: " ,"Initialized");
     }
 
@@ -69,12 +67,18 @@ public class main extends OpMode
 ///Gamepad 2
 
         //Brat
-        fer.brat.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+        fer.brat2.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+
+        if (gamepad2.b) {
+            fer.brat1.setPower(-.3);
+            fer.brat2.setPower(-.3);
+        }
 
         //Cleste
         if(gamepad2.right_bumper) {
             fer.clesteStanga.setPower(-1);
-            fer.clesteDreapta.setPower(-1 );
+            fer.clesteDreapta.setPower(-1);
         }
         else {
             fer.clesteStanga.setPower(1);

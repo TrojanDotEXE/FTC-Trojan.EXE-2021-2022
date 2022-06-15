@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 @TeleOp(name = "TeleOp-ul")
+@Disabled
 public class mainOpMode extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
@@ -26,7 +28,8 @@ public class mainOpMode extends OpMode {
     public DcMotor wheelRightFront;
     public DcMotor wheelLeftBack;
     public DcMotor wheelRightBack;
-    public DcMotor brat;
+    public DcMotor brat1;
+    public DcMotor brat2;
     public DcMotor carusel;
 
     public CRServo clesteStanga ;
@@ -51,7 +54,8 @@ public class mainOpMode extends OpMode {
         wheelRightFront = hardwareMap.get(DcMotor.class, "motorDreaptaFata");
         wheelLeftBack   = hardwareMap.get(DcMotor.class, "motorStangaSpate");
         wheelRightBack  = hardwareMap.get(DcMotor.class, "motorDreaptaSpate");
-        brat            = hardwareMap.get(DcMotor.class, "motorBrat");
+        brat1            = hardwareMap.get(DcMotor.class, "motorBrat1");
+        brat2            = hardwareMap.get(DcMotor.class, "motorBrat2");
         carusel         = hardwareMap.get(DcMotor.class, "motorCarusel");
         clesteStanga    = hardwareMap.get(CRServo.class, "leftClaw");
         clesteDreapta   = hardwareMap.get(CRServo.class, "rightClaw");
@@ -62,11 +66,22 @@ public class mainOpMode extends OpMode {
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE, wheelLeftBack, wheelLeftFront, wheelRightBack, wheelRightFront, brat, carusel);
-        setDirections(DcMotor.Direction.FORWARD, wheelLeftBack, wheelRightFront, brat);
-        setDirections(DcMotor.Direction.REVERSE, wheelRightBack, wheelLeftFront, carusel);
-        resetEncoders(wheelRightBack, wheelLeftBack, wheelRightFront, wheelLeftFront, brat);
-        stopMotors();
+        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE,
+                wheelLeftBack, wheelLeftFront,
+                wheelRightBack, wheelRightFront,
+                brat1, brat2, carusel
+        );
+        setDirections(DcMotor.Direction.FORWARD,
+                wheelLeftBack, wheelLeftFront,
+                brat2
+        );
+        setDirections(DcMotor.Direction.REVERSE,
+                wheelRightBack, wheelRightFront,
+                carusel, brat1
+        );
+        resetEncoders(wheelRightBack, wheelLeftBack,
+                wheelRightFront, wheelLeftFront
+        );
         clesteStanga.setDirection(DcMotorSimple.Direction.REVERSE);
 //        initVuforia();
 //        initTfod();
@@ -109,7 +124,8 @@ public class mainOpMode extends OpMode {
 ///Gamepad 2
 
         //Brat
-        brat.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+        brat1.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
+        brat2.setPower(Range.clip(gamepad2.left_stick_y, -.3, .3));
 
         //Cleste
         if(gamepad2.right_bumper) {
@@ -152,7 +168,8 @@ public class mainOpMode extends OpMode {
     public void stopMotors() {
         wheelLeftBack.setPower(0);
         wheelRightBack.setPower(0);
-        brat.setPower(0);
+        brat1.setPower(0);
+        brat2.setPower(0);
         carusel.setPower(0);
     }
 
