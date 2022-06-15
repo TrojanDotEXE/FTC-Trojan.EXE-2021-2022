@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
@@ -13,7 +14,6 @@ public class MetodeAutonoma extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {}
 
-    //ambele motoare aceeasi distanta
     public void goTo(double power, int rotatii, @NonNull DcMotor... motors){
         for(DcMotor motor:motors)
         {
@@ -24,10 +24,24 @@ public class MetodeAutonoma extends LinearOpMode {
         }
     }
 
-    //motoarele au directii diferite
     public void goTo(double power, int rotatii1, int rotatii2, DcMotor motor1, DcMotor motor2){
         goTo(power, rotatii1, motor1);
         goTo(power, rotatii2, motor2);
+    }
+
+    public void goTo(double velocity, int rotatii, @NonNull DcMotorEx... motors){
+        for(DcMotorEx motor:motors)
+        {
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor.setTargetPosition(rotatii);
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor.setVelocity(velocity);
+        }
+    }
+
+    public void goTo(double velocity, int rotatii1, int rotatii2, DcMotorEx motor1, DcMotorEx motor2){
+        goTo(velocity, rotatii1, motor1);
+        goTo(velocity, rotatii2, motor2);
     }
 
     //rotatii+ => rotire dreapta
@@ -41,6 +55,17 @@ public class MetodeAutonoma extends LinearOpMode {
         roataDreapta.setTargetPosition(-rotatii);
         roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         roataDreapta.setPower(power);
+    }
+
+    public void turn (double velocity, int rotatii, @NonNull DcMotorEx roataStanga, @NonNull DcMotorEx roataDreapta) {
+        roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        roataStanga.setTargetPosition(rotatii);
+        roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        roataStanga.setVelocity(velocity);
+        roataDreapta.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        roataDreapta.setTargetPosition(-rotatii);
+        roataDreapta.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        roataDreapta.setVelocity(velocity);
     }
 
     //nr rotatii encoder

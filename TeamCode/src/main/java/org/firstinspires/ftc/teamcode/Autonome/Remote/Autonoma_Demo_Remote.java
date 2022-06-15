@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.Autonome.MetodeAutonoma;
 import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+import org.firstinspires.ftc.teamcode.Hardware.Timing;
 
 
 @Autonomous(name = "Test #3", group = "Teste")
@@ -42,7 +43,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         runtime2.reset();
         //Ridica bratul la stratul 3
-        while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+50){
+        while(opModeIsActive() && runtime2.milliseconds()< Timing.T3.time+50){
             fer.brat1.setPower(.27);
         }
         fer.brat1.setPower(0);
@@ -58,7 +59,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
 
         runtime2.reset();
         //Ridica bratul la stratul 3
-        while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3+100f){
+        while(opModeIsActive() && runtime2.milliseconds()<Timing.T3.time+100){
             fer.brat1.setPower(.34);
         }
         fer.brat1.setPower(0);
@@ -94,7 +95,7 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         runtime2.reset();
 
         //Coboara bratul
-        while(opModeIsActive() && runtime2.milliseconds()<HardwareM.T3-100){
+        while(opModeIsActive() && runtime2.milliseconds()<Timing.T3.time-100){
             fer.brat1.setPower(-.2);
         }
         fer.brat1.setPower(0);
