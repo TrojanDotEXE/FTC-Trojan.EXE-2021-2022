@@ -23,7 +23,6 @@ public class HardwareM extends LinearOpMode {
     public DcMotorEx wheelLeftBack   = null;
     public DcMotorEx wheelRightBack  = null;
     public DcMotorEx brat1           = null;
-    public DcMotorEx brat2           = null;
     public DcMotorEx carusel         = null;
     public CRServo   clesteStanga    = null;
     public CRServo   clesteDreapta   = null;
@@ -49,7 +48,6 @@ public class HardwareM extends LinearOpMode {
         wheelLeftBack   = hardwaremap.get(DcMotorEx.class  , "motorStangaSpate");
         wheelRightBack  = hardwaremap.get(DcMotorEx.class  , "motorDreaptaSpate");
         brat1           = hardwaremap.get(DcMotorEx.class  , "motorBrat1");
-        brat2           = hardwaremap.get(DcMotorEx.class  , "motorBrat2");
         carusel         = hardwaremap.get(DcMotorEx.class  , "motorCarusel");
         clesteStanga    = hardwaremap.get(CRServo.class  , "leftClaw");
         clesteDreapta   = hardwaremap.get(CRServo.class  , "rightClaw");
@@ -62,19 +60,18 @@ public class HardwareM extends LinearOpMode {
         set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE,
                 wheelLeftBack, wheelLeftFront,
                 wheelRightBack, wheelRightFront,
-                carusel
+                carusel, brat1
                 );
         setDirections(DcMotor.Direction.FORWARD,
-                wheelRightBack, wheelRightFront,
-                brat2
+                wheelRightBack, wheelRightFront
                 );
         setDirections(DcMotor.Direction.REVERSE,
                 wheelLeftBack, wheelLeftFront,
-                carusel, brat1,
-                clesteStanga
+                carusel, clesteStanga
                 );
         resetEncoders(wheelRightBack, wheelLeftBack,
-                wheelRightFront, wheelLeftFront
+                wheelRightFront, wheelLeftFront,
+                brat1
                 );
         stopMotors();
 
@@ -114,7 +111,6 @@ public class HardwareM extends LinearOpMode {
         wheelLeftFront.setPower(0);
         wheelRightFront.setPower(0);
         brat1.setPower(0);
-        brat2.setPower(0);
         carusel.setPower(0);
     }
 

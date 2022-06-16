@@ -14,6 +14,7 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 //@Disabled
 public class main extends OpMode
 {
+    private final double ARM_MAX_LOAD_POWER = 0;
     private ElapsedTime runtime = new ElapsedTime();
     private Orientation angles  = new Orientation();
     private HardwareM   fer     = new HardwareM();
@@ -27,10 +28,16 @@ public class main extends OpMode
     @Override
     public void start() {
         runtime.reset();
+        fer.clesteStanga.setPower(1);
+        fer.clesteDreapta.setPower(.8);
     }
 
     @Override
     public void loop() {
+//        double rotatii = fer.brat1.getCurrentPosition()-44;
+//        double gravityCompensation = Math.cos(Math.toRadians(rotatii/.8)*ARM_MAX_LOAD_POWER);
+//        telemetry.addData("Rotatii: ", "%.4f", rotatii);
+//        telemetry.addData("Unghi: ", "%.4f", rotatii/.8);
         double fata_spate = gamepad1.left_stick_y;
         double stanga_dreapta = gamepad1.right_stick_x;
 
@@ -63,35 +70,23 @@ public class main extends OpMode
 
         //Carusel
         if(gamepad1.right_bumper)
-            fer.carusel.setPower(-.85);
+            fer.carusel.setPower(-.9);
         if(gamepad1.left_bumper)
-            fer.carusel.setPower(.85);
+            fer.carusel.setPower(.9);
         fer.carusel.setPower(0);
 
 ///Gamepad 2
 
         //Brat
-        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
-        fer.brat2.setPower(Range.clip(gamepad2.left_stick_y, -.7, .7));
+        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y*.5, -1, 1));
+
         telemetry.addData("Putere Btat: ", "%.4f", gamepad2.left_stick_y);
         telemetry.addData("Putere Btat1: ", "%.4f", fer.brat1.getPower());
-        telemetry.addData("Putere Btat2: ", "%.4f", fer.brat2.getPower());
 
-        if (gamepad2.b) {
-            fer.brat1.setPower(-.3);
-            fer.brat2.setPower(-.3);
-        }
-
-//        if (gamepad2.b) {
-//            if(fer.brat1.getCurrentPosition() < 1000) {
-//                fer.brat1.setPower(-.3);
-//                fer.brat2.setPower(-.3);
-//            }
-//            else {
-//                fer.brat1.setPower(.3);
-//                fer.brat2.setPower(.3);
-//            }
-//        }
+        if (gamepad2.left_trigger > 0)
+            fer.brat1.setPower(.35);
+        else if(gamepad2.right_trigger > 0)
+            fer.brat1.setPower(-.35);
 
         //Cleste
         if(gamepad2.right_bumper) {
@@ -100,7 +95,7 @@ public class main extends OpMode
         }
         else {
             fer.clesteStanga.setPower(1);
-            fer.clesteDreapta.setPower(.8);
+            fer.clesteDreapta.setPower(1);
         }
 
         telemetry.addData("Run Time: ", "%7d", (int)runtime.seconds());
