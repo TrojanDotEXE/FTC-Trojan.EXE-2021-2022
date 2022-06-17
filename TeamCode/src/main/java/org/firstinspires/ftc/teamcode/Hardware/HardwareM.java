@@ -18,6 +18,12 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 public class HardwareM extends LinearOpMode {
 
+    public static final double circumferenceCM = 10*Math.PI;
+    public static final double motorCPR = 1440;
+    public static final double cmPerRotation= circumferenceCM/motorCPR;
+    public static final double rotPerCM= 1/cmPerRotation;
+
+
     public DcMotorEx wheelLeftFront  = null;
     public DcMotorEx wheelRightFront = null;
     public DcMotorEx wheelLeftBack   = null;

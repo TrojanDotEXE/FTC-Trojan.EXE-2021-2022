@@ -29,7 +29,7 @@ public class MetodeAutonoma extends LinearOpMode {
         goTo(power, rotatii2, motor2);
     }
 
-    public void goTo(double velocity, int rotatii, @NonNull DcMotorEx... motors){
+    public void goToV(double velocity, int rotatii, @NonNull DcMotorEx... motors){
         for(DcMotorEx motor:motors)
         {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -39,9 +39,24 @@ public class MetodeAutonoma extends LinearOpMode {
         }
     }
 
-    public void goTo(double velocity, int rotatii1, int rotatii2, DcMotorEx motor1, DcMotorEx motor2){
-        goTo(velocity, rotatii1, motor1);
-        goTo(velocity, rotatii2, motor2);
+    public void goToV(double velocity, int rotatii1, int rotatii2, DcMotorEx motor1, DcMotorEx motor2){
+        goToV(velocity, rotatii1, motor1);
+        goToV(velocity, rotatii2, motor2);
+    }
+
+    public void goToVcm(double velocity, int cm, @NonNull DcMotorEx... motors){
+        for(DcMotorEx motor:motors)
+        {
+            motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            motor.setTargetPosition((int)(cm * HardwareM.rotPerCM));
+            motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            motor.setVelocity(velocity);
+        }
+    }
+
+    public void goToVcm(double velocity, double cm1, int cm2, DcMotorEx motor1, DcMotorEx motor2){
+        goToV(velocity, (int)(cm1 * HardwareM.rotPerCM), motor1);
+        goToV(velocity, (int)(cm2 *HardwareM.rotPerCM), motor2);
     }
 
     //rotatii+ => rotire dreapta
