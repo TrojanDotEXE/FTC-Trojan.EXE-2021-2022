@@ -119,11 +119,25 @@ public class HardwareM extends LinearOpMode {
             m.setPower(0);
     }
 
+    public void setWheelPowers(double p) {
+        wheelLeftBack.setPower(p);
+        wheelLeftFront.setPower(p);
+        wheelRightBack.setPower(p);
+        wheelRightFront.setPower(p);
+    }
+
     public void setWheelPowers(double p1, double p2) {
         wheelLeftBack.setPower(p1);
         wheelLeftFront.setPower(p1);
         wheelRightBack.setPower(p2);
         wheelRightFront.setPower(p2);
+    }
+
+    public void setWheelPowers(double p1, double p2, double p3, double p4) {
+        wheelRightFront.setPower(p1);
+        wheelRightBack.setPower(p2);
+        wheelLeftBack.setPower(p3);
+        wheelLeftFront.setPower(p4);
     }
 
     public void resetEncoders(@NonNull DcMotor ... motors) {

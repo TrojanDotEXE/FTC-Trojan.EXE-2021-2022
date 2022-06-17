@@ -49,10 +49,13 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat1.setPower(0);
 
         //mergi in fata
-        goTo(.35, -1925, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        goTo(.35, -1925, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){
+            fer.wheelLeftFront.setPower(.35);
+            fer.wheelRightFront.setPower(.35);
+        }
         fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelRightBack);
 
         //intoarce-te la stanga
         turn(-degrees90+9);
@@ -65,8 +68,11 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat1.setPower(0);
 
         //Mergi in fata pana la s.h.
-        goTo(.35, -1540, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy()));
+        goTo(.35, -1540, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy())){
+            fer.wheelLeftFront.setPower(.35);
+            fer.wheelRightFront.setPower(.35);
+        }
         fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
         fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
@@ -86,9 +92,12 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         fer.brat1.setPower(0);
 
         //mergi in spate la pozitia initiala
-        goTo(1, 1480, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy()));
-        fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        goTo(1, 1480, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelRightBack.isBusy())){
+            fer.wheelLeftFront.setPower(1);
+            fer.wheelRightFront.setPower(1);
+        }
+        fer.stopMotors(fer.wheelLeftBack, fer.wheelRightBack);
         fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
         //Reseteaza al 2-lea timer
@@ -104,32 +113,40 @@ public class Autonoma_Demo_Remote extends MetodeAutonoma
         turn(degrees90+12);
 
         //mergi in spate pana la carusel
-        goTo(1, 6380, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        goTo(1, 6380, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){
+            fer.wheelLeftFront.setPower(1);
+            fer.wheelRightFront.setPower(1);
+        }
         fer.stopMotors(fer.wheelRightBack, fer.wheelLeftBack);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelRightBack);
 
         //intoarce-te la stanga
         turn(-degrees90-9.5);
 
         //mergi in spate pana la carusel
-        goTo(1, 1900, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        goTo(1, 1900, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){
+            fer.wheelLeftFront.setPower(1);
+            fer.wheelRightFront.setPower(1);
+        }
         fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
+        fer.setEncoderMode(DcMotor.RunMode.RUN_USING_ENCODER, fer.wheelLeftBack, fer.wheelRightBack);
 
 
         runtime2.reset();
         //da o ratusca jos
            while(opModeIsActive() && runtime2.seconds()<3.5){
                fer.carusel.setPower(.8);
-
        }
         fer.carusel.setPower(0);
 
         //mergi in fata pana in s.u.
-        goTo(1, -2025, fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
-        while(opModeIsActive() && runtime.seconds() < 30 && runtime.seconds()<30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){}
+        goTo(1, -2025, fer.wheelLeftBack, fer.wheelRightBack);
+        while(opModeIsActive() && runtime.seconds() < 30 && (fer.wheelLeftBack.isBusy() || fer.wheelLeftBack.isBusy())){
+            fer.wheelLeftFront.setPower(1);
+            fer.wheelRightFront.setPower(1);
+        }
         fer.stopMotors(fer.wheelLeftBack, fer.wheelLeftFront, fer.wheelRightFront ,fer.wheelRightBack);
 
     }

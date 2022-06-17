@@ -14,11 +14,12 @@ import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
 //@Disabled
 public class main extends OpMode
 {
-    private final double ARM_MAX_LOAD_POWER = 0;
+    private final double ARM_MAX_LOAD_POWER = .35;
     private ElapsedTime runtime = new ElapsedTime();
     private Orientation angles  = new Orientation();
     private HardwareM   fer     = new HardwareM();
     private double      currAngle = 0.0;
+    private double compensation = 0;
 
     @Override
     public void init() {
@@ -28,39 +29,25 @@ public class main extends OpMode
     @Override
     public void start() {
         runtime.reset();
-        fer.clesteStanga.setPower(1);
-        fer.clesteDreapta.setPower(.8);
+        fer.restartServos();
     }
 
     @Override
     public void loop() {
-//        double rotatii = fer.brat1.getCurrentPosition()-44;
-//        double gravityCompensation = Math.cos(Math.toRadians(rotatii/.8)*ARM_MAX_LOAD_POWER);
-//        telemetry.addData("Rotatii: ", "%.4f", rotatii);
-//        telemetry.addData("Unghi: ", "%.4f", rotatii/.8);
         double fata_spate = gamepad1.left_stick_y;
         double stanga_dreapta = gamepad1.right_stick_x;
 
         double left = Range.clip(fata_spate - stanga_dreapta, -1, 1);
         double right = Range.clip(fata_spate + stanga_dreapta, -1, 1);
 
-        fer.wheelLeftBack.setPower(left);
-        fer.wheelLeftFront.setPower(left);
-        fer.wheelRightBack.setPower(right);
-        fer.wheelRightFront.setPower(right);
+        fer.setWheelPowers(left, right);
 
-        while(gamepad1.dpad_left) {
-            fer.wheelLeftBack.setPower(-.7);
-            fer.wheelLeftFront.setPower(-.7);
-            fer.wheelRightBack.setPower(.7);
-            fer.wheelRightFront.setPower(.7);
-            }
-        while(gamepad1.dpad_right) {
-            fer.wheelLeftBack.setPower(.7);
-            fer.wheelLeftFront.setPower(.7);
-            fer.wheelRightBack.setPower(-.7);
-            fer.wheelRightBack.setPower(-.7);
-        }
+        while(gamepad1.dpad_left)
+            fer.setWheelPowers(-.7, .7);
+
+        while(gamepad1.dpad_right)
+            fer.setWheelPowers(.7, -.7);
+
 
         if(gamepad1.y)
             turn(41);
@@ -78,9 +65,20 @@ public class main extends OpMode
 ///Gamepad 2
 
         //Brat
-        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y*.5, -1, 1));
+        double leftStickY2 = gamepad2.left_stick_y * 5;
 
-        telemetry.addData("Putere Btat: ", "%.4f", gamepad2.left_stick_y);
+
+        if (gamepad2.b) {
+            compensation = leftStickY2;
+        }
+
+        if (leftStickY2 > 0)
+            fer.brat1.setPower(Range.clip(leftStickY2, -1, 1));
+
+        else if (compensation > 0)
+                fer.brat1.setPower(Range.clip(compensation, -1, 1));
+
+        telemetry.addData("Putere Btat: ", "%.4f", leftStickY2);
         telemetry.addData("Putere Btat1: ", "%.4f", fer.brat1.getPower());
 
         if (gamepad2.left_trigger > 0)
