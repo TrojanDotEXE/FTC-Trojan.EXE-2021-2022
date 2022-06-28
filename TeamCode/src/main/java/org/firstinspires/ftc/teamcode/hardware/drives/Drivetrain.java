@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Hardware.drives;
+package org.firstinspires.ftc.teamcode.hardware.drives;
 
 public interface Drivetrain {
     enum State {

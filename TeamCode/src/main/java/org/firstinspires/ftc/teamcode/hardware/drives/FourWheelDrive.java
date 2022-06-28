@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Hardware.drives;
+package org.firstinspires.ftc.teamcode.hardware.drives;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -20,16 +20,18 @@ public class FourWheelDrive implements Drivetrain {
     public DcMotorEx backLeft;
     public DcMotorEx backRight;
 
-    final double PULSES_PER_REVOLUTION = 250;
-    final double GEAR_RATIO = 0.25;
+    final double PULSES_PER_REVOLUTION = 250;//!
+    final double GEAR_RATIO = 0.25;//!
 
     private State currentState = State.STOPPED;
 
     public FourWheelDrive( HardwareMap hardwareMap ) {
-        this( hardwareMap, "frontLeft", "backLeft", "frontRight", "backRight" );
+        this( hardwareMap,"frontLeft",   "backLeft",
+                         "frontRight", "backRight" );
     }
 
-    public FourWheelDrive( HardwareMap hardwareMap, String frontLeftName, String backLeftName, String frontRightName, String backRightName ) {
+    public FourWheelDrive( HardwareMap hardwareMap, String frontLeftName, String backLeftName,
+                           String frontRightName, String backRightName ) {
         setUpMotors( hardwareMap, frontLeftName, backLeftName, frontRightName, backRightName );
     }
 
@@ -39,6 +41,7 @@ public class FourWheelDrive implements Drivetrain {
      * @return totalTicks - the amount of ticks to move forward
      */
     public int convertDistTicks( double distanceToTravel, double circumference ) {
+
         double revolutions = distanceToTravel / circumference;
         int totalTicks = (int) Math.round( (revolutions * PULSES_PER_REVOLUTION) / GEAR_RATIO );
 
@@ -46,6 +49,7 @@ public class FourWheelDrive implements Drivetrain {
     }
 
     public int convertTicksDist( double ticksToTravel, double circumference ) {
+
         double calculations = ticksToTravel * circumference * GEAR_RATIO;
         int totalDistance = (int) Math.round( calculations / PULSES_PER_REVOLUTION );
 
@@ -61,7 +65,9 @@ public class FourWheelDrive implements Drivetrain {
  * @param frontLeftName  name of front left motor in the hardware map
  * @param backLeftName   name of back left motor in the hardware map
  */
-private void setUpMotors( HardwareMap hardwareMap, String frontLeftName, String backLeftName, String frontRightName, String backRightName ) {
+private void setUpMotors( HardwareMap hardwareMap, String frontLeftName, String backLeftName,
+                          String frontRightName, String backRightName ) {
+
     frontLeft = hardwareMap.get( DcMotorEx.class, frontLeftName );
     backLeft = hardwareMap.get( DcMotorEx.class, backLeftName );
     frontRight = hardwareMap.get( DcMotorEx.class, frontRightName );
@@ -70,8 +76,6 @@ private void setUpMotors( HardwareMap hardwareMap, String frontLeftName, String 
     setMotorDirections( FORWARD, FORWARD, REVERSE, REVERSE );
     setZeroPowerBehavior( BRAKE, BRAKE, BRAKE, BRAKE );
     //setRunMode(STOP_AND_RESET_ENCODER, STOP_AND_RESET_ENCODER, STOP_AND_RESET_ENCODER, STOP_AND_RESET_ENCODER );
-
-
 }
 
     @Override

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Teste.TeleOps;
+package org.firstinspires.ftc.teamcode.test.TeleOps;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Hardware.Robot;
+import org.firstinspires.ftc.teamcode.hardware.robot.Robot;
 
 @TeleOp(name = "Test_IMU", group = "Teste_TeleOp")
 @Disabled

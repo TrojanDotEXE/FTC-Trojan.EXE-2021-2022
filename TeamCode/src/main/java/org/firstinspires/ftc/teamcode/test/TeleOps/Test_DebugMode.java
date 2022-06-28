@@ -1,6 +1,5 @@
-package org.firstinspires.ftc.teamcode.Teste.TeleOps;
+package org.firstinspires.ftc.teamcode.test.TeleOps;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
