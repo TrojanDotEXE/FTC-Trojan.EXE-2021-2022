@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
-public class HardwareM extends LinearOpMode {
+public class Robot extends LinearOpMode {
 
     public static final double circumferenceCM = 10*Math.PI;
     public static final double motorCPR = 1440;
@@ -208,6 +208,6 @@ public class HardwareM extends LinearOpMode {
 
     @Override
     public void runOpMode(){}
-    public HardwareM(){}
+    public Robot(){}
 }
 

@@ -8,7 +8,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+import org.firstinspires.ftc.teamcode.Hardware.Robot;
 
 @TeleOp(name = "TeleOP", group = "Teste")
 //@Disabled
@@ -17,7 +17,7 @@ public class main extends OpMode
     private final double ARM_MAX_LOAD_POWER = 0;
     private ElapsedTime runtime = new ElapsedTime();
     private Orientation angles  = new Orientation();
-    private HardwareM   fer     = new HardwareM();
+    private Robot fer     = new Robot();
     private double      currAngle = 0.0;
 
     @Override
@@ -28,7 +28,8 @@ public class main extends OpMode
     @Override
     public void start() {
         runtime.reset();
-        fer.restartServos();
+        fer.clesteStanga.setPower(1);
+        fer.clesteDreapta.setPower(.8);
     }
 
     @Override
@@ -64,26 +65,16 @@ public class main extends OpMode
 ///Gamepad 2
 
         //Brat
-        double leftStickY2 = gamepad2.left_stick_y * 5;
+        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y*.5, -1, 1));
 
-
-        if (gamepad2.b) {
-            compensation = leftStickY2;
-        }
-
-        if (leftStickY2 > 0)
-            fer.brat1.setPower(Range.clip(leftStickY2, -1, 1));
-
-        else if (compensation > 0)
-                fer.brat1.setPower(Range.clip(compensation, -1, 1));
-
-        telemetry.addData("Putere Btat: ", "%.4f", leftStickY2);
+        telemetry.addData("Putere Btat: ", "%.4f", gamepad2.left_stick_y);
         telemetry.addData("Putere Btat1: ", "%.4f", fer.brat1.getPower());
 
-        if (gamepad2.left_trigger > 0)
-            fer.brat1.setPower(.35);
-        else if(gamepad2.right_trigger > 0)
-            fer.brat1.setPower(-.35);
+        if(gamepad2.right_trigger > 0)
+            fer.brat1.setPower(-.3);
+        if(gamepad2.b) {
+            fer.brat1.setPower(.3);
+        }
 
         //Cleste
         if(gamepad2.right_bumper) {

@@ -8,14 +8,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
+import org.firstinspires.ftc.teamcode.Hardware.Robot;
 
 @TeleOp(name = "Test_IMU", group = "Teste_TeleOp")
 @Disabled
 public class Test_IMU extends OpMode {
     private double      currAngle = 0.0;
     private Orientation angles    = new Orientation();
-    private HardwareM   fer       = new HardwareM();
+    private Robot fer       = new Robot();
 
     @Override
     public void init() {

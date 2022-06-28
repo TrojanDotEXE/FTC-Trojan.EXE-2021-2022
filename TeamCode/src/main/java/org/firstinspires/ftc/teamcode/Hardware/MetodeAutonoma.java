@@ -7,8 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Hardware.HardwareM;
-
 public class MetodeAutonoma extends LinearOpMode {
 
     @Override
@@ -48,15 +46,15 @@ public class MetodeAutonoma extends LinearOpMode {
         for(DcMotorEx motor:motors)
         {
             motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            motor.setTargetPosition((int)(cm * HardwareM.rotPerCM));
+            motor.setTargetPosition((int)(cm * Robot.rotPerCM));
             motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             motor.setVelocity(velocity);
         }
     }
 
     public void goToVcm(double velocity, double cm1, int cm2, DcMotorEx motor1, DcMotorEx motor2){
-        goToV(velocity, (int)(cm1 * HardwareM.rotPerCM), motor1);
-        goToV(velocity, (int)(cm2 *HardwareM.rotPerCM), motor2);
+        goToV(velocity, (int)(cm1 * Robot.rotPerCM), motor1);
+        goToV(velocity, (int)(cm2 * Robot.rotPerCM), motor2);
     }
 
     //rotatii+ => rotire dreapta
