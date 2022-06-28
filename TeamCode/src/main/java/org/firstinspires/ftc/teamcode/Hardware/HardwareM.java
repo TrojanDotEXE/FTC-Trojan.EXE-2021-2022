@@ -57,61 +57,25 @@ public class HardwareM extends LinearOpMode {
         setIMUParams(parameters);
         imu.initialize(parameters);
 
-        set0Behaviour(DcMotor.ZeroPowerBehavior.BRAKE,
-                wheelLeftBack, wheelLeftFront,
-                wheelRightBack, wheelRightFront,
-                carusel, brat1
-                );
-        setDirections(DcMotor.Direction.FORWARD,
-                wheelRightBack, wheelRightFront
-                );
-        setDirections(DcMotor.Direction.REVERSE,
-                wheelLeftBack, wheelLeftFront,
-                carusel, clesteStanga
-                );
-        resetEncoders(wheelRightBack, wheelLeftBack,
-                wheelRightFront, wheelLeftFront,
-                brat1
-                );
+        setBehaviourBrake(wheelLeftBack , wheelLeftFront,
+                          wheelRightBack, wheelRightFront,
+                          carusel       , brat1
+        );
+        setDirectionsForward(wheelRightBack, wheelRightFront);
+
+        setDirectionsReverse(wheelLeftBack , wheelLeftFront,
+                             carusel       , clesteStanga
+        );
+        resetEncoders(wheelRightBack , wheelLeftBack,
+                      wheelRightFront, wheelLeftFront,
+                      brat1
+        );
         stopMotors();
 
 //        initVuforia();
 //        initTfod();
 
         telemetry.addData("Status: " ,"Initialized");
-    }
-
-    private void setDirections(DcMotorSimple.Direction d, @NonNull DcMotorSimple ... motors) {
-        for (DcMotorSimple m:motors)
-            m.setDirection(d);
-    }
-
-    private void set0Behaviour(DcMotor.ZeroPowerBehavior mode, @NonNull DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setZeroPowerBehavior(mode);
-    }
-
-    private void setIMUParams(@NonNull BNO055IMU.Parameters param) {
-        param.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        param.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-        param.calibrationDataFile = "BNO055IMUCalibration.json";
-        param.loggingEnabled = true;
-        param.loggingTag = "IMU";
-        param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-    }
-
-    public void setEncoderMode(DcMotor.RunMode mode, @NonNull DcMotor ... motors) {
-        for (DcMotor m:motors)
-            m.setMode(mode);
-    }
-
-    public void stopMotors() {
-        wheelLeftBack.setPower(0);
-        wheelRightBack.setPower(0);
-        wheelLeftFront.setPower(0);
-        wheelRightFront.setPower(0);
-        brat1.setPower(0);
-        carusel.setPower(0);
     }
 
     public void stopMotors(@NonNull DcMotorSimple ... motors) {
@@ -140,6 +104,27 @@ public class HardwareM extends LinearOpMode {
         wheelLeftFront.setPower(p4);
     }
 
+    public void setWheelVelocity(double v) {
+        wheelLeftBack.setPower(v);
+        wheelLeftFront.setPower(v);
+        wheelRightBack.setPower(v);
+        wheelRightFront.setPower(v);
+    }
+
+    public void setWheelVelocity(double v1, double v2) {
+        wheelLeftBack.setPower(v1);
+        wheelLeftFront.setPower(v1);
+        wheelRightBack.setPower(v2);
+        wheelRightFront.setPower(v2);
+    }
+
+    public void setWheelVelocity(double v1, double v2, double v3, double v4) {
+        wheelRightFront.setPower(v1);
+        wheelRightBack.setPower(v2);
+        wheelLeftBack.setPower(v3);
+        wheelLeftFront.setPower(v4);
+    }
+
     public void resetEncoders(@NonNull DcMotor ... motors) {
         for(DcMotor motor:motors)
         {
@@ -148,14 +133,49 @@ public class HardwareM extends LinearOpMode {
         }
     }
 
+    public void setEncoderMode(DcMotor.RunMode mode, @NonNull DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setMode(mode);
+    }
+
     public void restartServos() {
         clesteStanga.setPower(1);
         clesteDreapta.setPower(.8);
     }
 
-    @Override
-    public void runOpMode(){}
-    public HardwareM(){}
+
+    private void setDirectionsForward(@NonNull DcMotorSimple ... motors) {
+        for (DcMotorSimple m:motors)
+            m.setDirection(DcMotor.Direction.FORWARD);
+    }
+
+    private void setDirectionsReverse(@NonNull DcMotorSimple ... motors) {
+        for (DcMotorSimple m:motors)
+            m.setDirection(DcMotor.Direction.REVERSE);
+    }
+
+    private void setBehaviourBrake(@NonNull DcMotor ... motors) {
+        for (DcMotor m:motors)
+            m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    private void stopMotors() {
+        wheelLeftBack.setPower(0);
+        wheelRightBack.setPower(0);
+        wheelLeftFront.setPower(0);
+        wheelRightFront.setPower(0);
+        brat1.setPower(0);
+        carusel.setPower(0);
+    }
+
+    private void setIMUParams(@NonNull BNO055IMU.Parameters param) {
+        param.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        param.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        param.calibrationDataFile = "BNO055IMUCalibration.json";
+        param.loggingEnabled = true;
+        param.loggingTag = "IMU";
+        param.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+    }
 
     private void initVuforia() {
 
@@ -180,5 +200,8 @@ public class HardwareM extends LinearOpMode {
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
     }
 
+    @Override
+    public void runOpMode(){}
+    public HardwareM(){}
 }
 
