@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Autonome;
+package org.firstinspires.ftc.teamcode.Hardware;
 
 import androidx.annotation.NonNull;
 
@@ -72,7 +72,7 @@ public class MetodeAutonoma extends LinearOpMode {
         roataDreapta.setPower(power);
     }
 
-    public void turn (double velocity, int rotatii, @NonNull DcMotorEx roataStanga, @NonNull DcMotorEx roataDreapta) {
+    public void turnV (double velocity, int rotatii, @NonNull DcMotorEx roataStanga, @NonNull DcMotorEx roataDreapta) {
         roataStanga.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         roataStanga.setTargetPosition(rotatii);
         roataStanga.setMode(DcMotor.RunMode.RUN_TO_POSITION);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOpuri.Altele;
+package org.firstinspires.ftc.teamcode.Teste.TeleOps;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
-@Autonomous(name="TestCamera", group ="Teste")
-//@Disabled
-public class TestCamera extends LinearOpMode {
+@Autonomous(name = "Test_Camera", group = "Test_Auto")
+@Disabled
+public class Test_Camera extends LinearOpMode {
 
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
     private static final String[] LABELS = {

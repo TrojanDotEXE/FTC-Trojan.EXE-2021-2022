@@ -28,8 +28,7 @@ public class main extends OpMode
     @Override
     public void start() {
         runtime.reset();
-        fer.clesteStanga.setPower(1);
-        fer.clesteDreapta.setPower(.8);
+        fer.restartServos();
     }
 
     @Override
@@ -40,30 +39,14 @@ public class main extends OpMode
         double left = Range.clip(fata_spate - stanga_dreapta, -1, 1);
         double right = Range.clip(fata_spate + stanga_dreapta, -1, 1);
 
-        if(gamepad1.right_trigger > 0) {
-            fer.wheelLeftBack.setPower(Range.clip(fata_spate - stanga_dreapta, -1, 1));
-            fer.wheelLeftFront.setPower(Range.clip(fata_spate - stanga_dreapta, -1, 1));
-            fer.wheelRightBack.setPower(Range.clip(fata_spate + stanga_dreapta, -1, 1));
-            fer.wheelRightFront.setPower(Range.clip(fata_spate + stanga_dreapta, -1, 1));
-        }
+        fer.setWheelPowers(left, right);
 
-        fer.wheelLeftBack.setPower(left);
-        fer.wheelLeftFront.setPower(left);
-        fer.wheelRightBack.setPower(right);
-        fer.wheelRightFront.setPower(right);
+        while(gamepad1.dpad_left)
+            fer.setWheelPowers(-.7, .7);
 
-        while(gamepad1.dpad_left) {
-            fer.wheelLeftBack.setPower(-.7);
-            fer.wheelLeftFront.setPower(-.7);
-            fer.wheelRightBack.setPower(.7);
-            fer.wheelRightFront.setPower(.7);
-            }
-        while(gamepad1.dpad_right) {
-            fer.wheelLeftBack.setPower(.7);
-            fer.wheelLeftFront.setPower(.7);
-            fer.wheelRightBack.setPower(-.7);
-            fer.wheelRightBack.setPower(-.7);
-        }
+        while(gamepad1.dpad_right)
+            fer.setWheelPowers(.7, -.7);
+
 
 //        if(gamepad1.y)
 //            turn(41);
@@ -81,16 +64,26 @@ public class main extends OpMode
 ///Gamepad 2
 
         //Brat
-        fer.brat1.setPower(Range.clip(gamepad2.left_stick_y*.5, -1, 1));
+        double leftStickY2 = gamepad2.left_stick_y * 5;
 
-        telemetry.addData("Putere Btat: ", "%.4f", gamepad2.left_stick_y);
+
+        if (gamepad2.b) {
+            compensation = leftStickY2;
+        }
+
+        if (leftStickY2 > 0)
+            fer.brat1.setPower(Range.clip(leftStickY2, -1, 1));
+
+        else if (compensation > 0)
+                fer.brat1.setPower(Range.clip(compensation, -1, 1));
+
+        telemetry.addData("Putere Btat: ", "%.4f", leftStickY2);
         telemetry.addData("Putere Btat1: ", "%.4f", fer.brat1.getPower());
 
-        if(gamepad2.right_trigger > 0)
-            fer.brat1.setPower(-.35);
-        if(gamepad2.b) {
+        if (gamepad2.left_trigger > 0)
             fer.brat1.setPower(.35);
-        }
+        else if(gamepad2.right_trigger > 0)
+            fer.brat1.setPower(-.35);
 
         //Cleste
         if(gamepad2.right_bumper) {
