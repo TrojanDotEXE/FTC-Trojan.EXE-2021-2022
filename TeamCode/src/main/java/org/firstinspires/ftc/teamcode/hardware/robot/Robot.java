@@ -23,7 +23,6 @@ public class Robot extends LinearOpMode {
     public static final double cmPerRotation= circumferenceCM/motorCPR;
     public static final double rotPerCM= 1/cmPerRotation;
 
-
     public DcMotorEx wheelLeftFront  = null;
     public DcMotorEx wheelRightFront = null;
     public DcMotorEx wheelLeftBack   = null;

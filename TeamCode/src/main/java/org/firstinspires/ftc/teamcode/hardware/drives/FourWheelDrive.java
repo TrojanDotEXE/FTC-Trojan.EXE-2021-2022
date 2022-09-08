@@ -5,12 +5,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.FORWARD;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
-
 import com.qualcomm.robotcore.hardware.DcMotor.RunMode;
 import com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior;
-
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 
@@ -41,18 +38,14 @@ public class FourWheelDrive implements Drivetrain {
      * @return totalTicks - the amount of ticks to move forward
      */
     public int convertDistTicks( double distanceToTravel, double circumference ) {
-
         double revolutions = distanceToTravel / circumference;
         int totalTicks = (int) Math.round( (revolutions * PULSES_PER_REVOLUTION) / GEAR_RATIO );
-
         return totalTicks;
     }
 
     public int convertTicksDist( double ticksToTravel, double circumference ) {
-
         double calculations = ticksToTravel * circumference * GEAR_RATIO;
         int totalDistance = (int) Math.round( calculations / PULSES_PER_REVOLUTION );
-
         return totalDistance;
     }
 
