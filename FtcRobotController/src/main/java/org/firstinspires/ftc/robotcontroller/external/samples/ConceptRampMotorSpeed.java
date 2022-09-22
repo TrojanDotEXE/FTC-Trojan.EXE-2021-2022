@@ -50,10 +50,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @Disabled
 public class ConceptRampMotorSpeed extends LinearOpMode {
 
-    static final double INCREMENT   = 0.01;     // amount to ramp motor each CYCLE_MS cycle
-    static final int    CYCLE_MS    =   50;     // period of each cycle
-    static final double MAX_FWD     =  1.0;     // Maximum FWD power applied to motor
-    static final double MAX_REV     = -1.0;     // Maximum REV power applied to motor
+    static final double INCREMENT   = 0.10;     // amount to ramp motor each CYCLE_MS cycle
+    static final int    CYCLE_MS    =   20;     // period of each cycle
+    static final double MAX_FWD     =  2.0;     // Maximum FWD power applied to motor
+    static final double MAX_REV     =  1.0;     // Maximum REV power applied to motor
 
     // Define class members
     DcMotor motor;
