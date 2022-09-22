@@ -3,9 +3,6 @@ package org.firstinspires.ftc.teamcode.TeleOpuri;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorImpl;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -23,7 +20,6 @@ public class main extends OpMode
     private Orientation angles  = new Orientation();
             HardwareM   fer     = new HardwareM();
     private double      currAngle = 0.0;
-    private DcMotorEx
 
     @Override
     public void init() {
@@ -86,7 +82,7 @@ public class main extends OpMode
             fer.clesteDreapta.setPower(.8);
         }
         if(gamepad1.y)
-            turn(42);
+            turn(41);
 
         if (gamepad1.b)
             turn(-41);
