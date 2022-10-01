@@ -8,11 +8,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.hardware.drives.FourWheelDrive;
+
 public class Robot extends LinearOpMode {
 
     public ElapsedTime t1 = new ElapsedTime();
-    public DcMotor left = null;
-    public DcMotor right = null;
+    public FourWheelDrive drivetrain;
     public CRServo cleste = null;
 
     public void initialize(@NonNull HardwareMap hardwaremap) {
